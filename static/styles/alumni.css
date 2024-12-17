@@ -34,3 +34,7 @@ button>img {
     max-width: 77rem;
     margin-inline: auto;
 }
+
+.container>div {
+    width: 8rem;
+}

@@ -1,13 +1,23 @@
 {% extends "layout/layout.jinja" %}
 {% set highlight_tab = "manage" %}
 {% block main %}
-<a href="/upload">
-    <button type="button">upload alumni</button>
-</a>
+<link rel="stylesheet" href="/static/styles/manage.css">
 <a href="/hash">
-    <button type="button">hash</button>
+    <button type="button">
+        <img src="/static/pics/icons/hash.svg">
+        Hash Alumni Data File Content
+    </button>
+</a>
+<a href="/upload">
+    <button type="button">
+        <img src="/static/pics/icons/upload.svg">
+        Upload Alumni From Data File
+    </button>
 </a>
 <a href="/admins">
-    <button type="button">admins</button>
+    <button type="button">
+        <img src="/static/pics/icons/manage-solid.svg">
+        Manage Admins and Permissions
+    </button>
 </a>
 {% endblock %}
