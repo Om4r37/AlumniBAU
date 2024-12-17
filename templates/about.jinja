@@ -1,10 +1,10 @@
 {% extends "layout/layout.jinja" %}
 {% block main %}
-    <link href="/static/styles/about.css" rel="stylesheet">
-    {% for k, v in about.items() %}
-        <details open>
-            <summary>{{ k }}</summary>
-            <p>{{ v }}</p>
-        </details>
-    {% endfor %}
+<link href="/static/styles/about.css" rel="stylesheet">
+{% for k, v in about.items() %}
+    <details open>
+        <summary>{{ k }}</summary>
+        <p>{{ v }}</p>
+    </details>
+{% endfor %}
 {% endblock %}

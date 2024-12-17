@@ -1,0 +1,9 @@
+{% from "utils/field.jinja" import render_field %}
+{% macro render_form(form, params="") %}
+<form method="post" action="{{form.route}}" {{params}}>
+    <p class="form-title">{{form.form_title}}</p>
+{% for field in form %}
+    {{ render_field(field) }}
+{% endfor %}
+</form>
+{% endmacro %}

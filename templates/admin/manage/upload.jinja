@@ -1,11 +1,11 @@
 {% extends "layout/layout.jinja" %}
-{% from "form.jinja" import render_form %}
+{% from "utils/form.jinja" import render_form %}
 {% set highlight_tab = "manage" %}
 {% block main %}
-<link rel="stylesheet" href="/static/styles/upload.css">
+<link rel="stylesheet" href="/static/styles/admin/upload.css">
 <h4 class="download">
     <a href="/static/examples/example-hashed.csv" target="_blank">
-        <img src="/static/pics/icons/download.svg">
+        <img src="/static/pics/icons/admin/download.svg">
         Download Example CSV
     </a>
 </h4>
