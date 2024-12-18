@@ -1,7 +1,7 @@
 # change before deployment
 DATABASE = 'database.db'
 SCHEMA = 'schema.sql'
-DEBUG = True
+DEBUG = False
 SECRET_KEY = 'development_key'
 USERNAME = 'admin'
 PASSWORD = 'default'
