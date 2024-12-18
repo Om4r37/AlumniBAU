@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request
+from flask import Blueprint, flash, redirect, render_template, request, session
 from utils import admin_required, manager_required
 from forms.manage.upload_alumni import UploadAlumniForm
 from forms.manage.hash_file import hashFileForm
@@ -42,7 +42,7 @@ def hash():
 @admin_required
 @manager_required
 def admins():
-    admins = repo.get_all_admins()
+    admins = repo.get_all_admins(session.get("id"))
     return render_template("admin/manage/admins.jinja", admins=admins)
 
 

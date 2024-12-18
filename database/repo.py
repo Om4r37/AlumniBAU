@@ -70,8 +70,8 @@ class repo:
         db.execute("DELETE FROM admins WHERE id = ?;", id)
 
     @staticmethod
-    def get_all_admins():
-        return db.execute("SELECT * FROM admins")
+    def get_all_admins(id):
+        return db.execute("SELECT * FROM admins WHERE id != ? AND id != 1;", id)
 
     @staticmethod
     def is_admin(username):
