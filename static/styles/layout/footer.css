@@ -59,7 +59,7 @@ main {
 .socialContainer {
     width: 52px;
     height: 52px;
-    background-color: rgb(5, 129, 13);
+    background-color: #09682d;
     display: flex;
     align-items: center;
     justify-content: center;

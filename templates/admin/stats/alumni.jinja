@@ -67,6 +67,22 @@
 </script>
 <script src="static/scripts/Sortable/sorttable.js"></script>
 {% else %}
-there's no Alumni.
+<link rel="stylesheet" href="/static/styles/admin/table.css">
+<style>
+main {
+    text-align: center;
+}
+main>a {
+    margin-left: 1rem;
+}
+</style>
+<h3>There's no alumni added.</h3>
+{{ back("/manage") }}
+<a href="/add">
+    <button>
+        <img src="/static/pics/icons/admin/add.svg">
+        Add Admin
+    </button>
+</a>
 {% endif %}
 {% endblock %}

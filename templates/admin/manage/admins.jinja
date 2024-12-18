@@ -67,8 +67,12 @@
 main {
     text-align: center;
 }
+main>a {
+    margin-left: 1rem;
+}
 </style>
 <h3>There's no admins to manage.</h3>
+{{ back("/manage") }}
 <a href="/add">
     <button>
         <img src="/static/pics/icons/admin/add.svg">
