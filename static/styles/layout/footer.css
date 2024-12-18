@@ -29,10 +29,94 @@ main {
     justify-content: space-around;
     align-items: center;
     height: 100%;
+    font-weight: bolder;
 }
 
 .links>a {
     line-height: 2rem;
     text-decoration: none;
     color: rgb(37, 37, 37);
+}
+
+.card {
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* for all social containers*/
+.socialContainer {
+    width: 52px;
+    height: 52px;
+    background-color: rgb(5, 129, 13);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-duration: 0.3s;
+    border-radius: 30px;
+}
+
+.socialContainer:hover {
+    transition-duration: 0.3s;
+    transform: scale(1.2);
+}
+
+/* facebook*/
+.containerOne:hover {
+    background-color: #2c29d6;
+}
+
+/* twitter*/
+.containerTwo:hover {
+    background-color: #00acee;
+}
+
+/* youtube*/
+.containerThree:hover {
+    background-color: #ff0000;
+}
+
+/* instagram*/
+.containerFour:hover {
+    background-color: #d62976;
+}
+
+/* linkdin*/
+.containerFive:hover {
+    background-color: #0072b1;
+}
+
+.socialContainer:active {
+    transform: scale(0.9);
+    transition-duration: 0.3s;
+}
+
+.social {
+    width: 17px;
+    filter: invert(1);
+}
+
+.social path {
+    fill: rgb(255, 255, 255);
+}
+
+.socialContainer:hover .social {
+    animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
