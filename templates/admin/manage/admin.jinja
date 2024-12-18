@@ -1,9 +1,11 @@
 {% extends "layout/layout.jinja" %}
 {% set highlight_tab = "manage" %}
 {% from "utils/form.jinja" import render_form %}
+{% from "utils/back.jinja" import back %}
 {% block main %}
 <link rel="stylesheet" href="/static/styles/form.css">
 <link rel="stylesheet" href="/static/styles/admin/add.css">
 {{render_form(form)}}
-{% include "utils/back.jinja" %}
+<a href="{{form.delete}}" class="delete">Delete {{' '.join(form.form_title.split(' ')[2:])}}</a>
+{{ back("/admins") }}
 {% endblock %}

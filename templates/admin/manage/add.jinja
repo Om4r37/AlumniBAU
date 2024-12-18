@@ -1,9 +1,10 @@
 {% extends "layout/layout.jinja" %}
 {% set highlight_tab = "manage" %}
 {% from "utils/form.jinja" import render_form %}
+{% from "utils/back.jinja" import back %}
 {% block main %}
 <link rel="stylesheet" href="/static/styles/form.css">
 <link rel="stylesheet" href="/static/styles/admin/add.css">
 {{render_form(form)}}
-{% include "utils/back.jinja" %}
+{{ back("/admins") }}
 {% endblock %}

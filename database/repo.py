@@ -55,6 +55,21 @@ class repo:
         return db.execute("SELECT * FROM admins WHERE id = ?;", id)[0]
 
     @staticmethod
+    def edit_admin(data, id):
+        db.execute(
+            "UPDATE admins SET mod = ?, manage = ?, announce = ?, stats = ? WHERE id = ?;",
+            data["mod"],
+            data["manage"],
+            data["announce"],
+            data["stats"],
+            id,
+        )
+
+    @staticmethod
+    def delete_admin(id):
+        db.execute("DELETE FROM admins WHERE id = ?;", id)
+
+    @staticmethod
     def get_all_admins():
         return db.execute("SELECT * FROM admins")
 

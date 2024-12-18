@@ -5,3 +5,18 @@ form {
 main {
     text-align: center;
 }
+
+.delete {
+    background-color: #58ffff;
+    color: black;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    padding-left: 2.5rem;
+    background-image: url('/static/pics/icons/admin/remove.svg');
+    background-repeat: no-repeat;
+    filter: invert(1);
+    background-size: 1rem;
+    background-position: 10% 40%;
+}

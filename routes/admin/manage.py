@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, render_template, request
+from flask import Blueprint, flash, redirect, render_template, request
 from utils import admin_required, manager_required
 from forms.manage.upload_alumni import UploadAlumniForm
 from forms.manage.hash_file import hashFileForm
@@ -63,18 +63,19 @@ def add():
 def edit():
     id = request.args.get("id")
     admin = repo.get_admin_by_id(id)
-    form = EditAdminForm(data=admin)
+    form = EditAdminForm(data=admin, id=id)
     form.form_title = "Edit Admin: " + admin["username"]
     if form.validate_on_submit():
-        # repo.edit_admin(id, form.data)
-        flash(f"Successfully edited {form.username.data}")
+        repo.edit_admin(form.data, id)
+        flash(f"Successfully edited {admin["username"]}")
     return render_template("admin/manage/admin.jinja", form=form)
 
 
-# @bp.route("/delete/<id:int>")
-# @admin_required
-# @manager_required
-# def delete(id):
-#     repo.delete_admin(id)
-#     flash("Successfully deleted admin")
-#     return redirect(url_for("manage.admins"))
+@bp.route("/delete")
+@admin_required
+@manager_required
+def delete():
+    id = request.args.get("id")
+    repo.delete_admin(id)
+    flash("Successfully deleted admin")
+    return redirect("/admins")

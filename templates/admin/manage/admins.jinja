@@ -1,10 +1,11 @@
 {% extends "layout/layout.jinja" %}
 {% set highlight_tab = "manage" %}
+{% from "utils/back.jinja" import back %}
 {% block main %}
 <link rel="stylesheet" href="/static/styles/admin/table.css">
 <script src="static/scripts/TableFilter/tablefilter.js"></script>
 <div class="container" style="max-width: 1000px;">
-    {% include "utils/back.jinja" %}
+    {{ back("/manage") }}
     <h2>Admins</h2>
     <a href="/add">
         <button>

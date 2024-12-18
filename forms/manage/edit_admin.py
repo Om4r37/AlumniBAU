@@ -3,8 +3,13 @@ from wtforms import SubmitField, BooleanField
 
 
 class EditAdminForm(FlaskForm):
+    def __init__(self, id, *args, **kwargs):
+        super(EditAdminForm, self).__init__(*args, **kwargs)
+        self.id = id
+        self.route = f"/edit?id={id}"
+        self.delete = f"/delete?id={id}"
+
     form_title = "Edit Admin"
-    route = "/edit"
     manage = BooleanField("Is Manager", description="<span>Is Manager</span>")
     announce = BooleanField("Can Announce", description="<span>Can Announce</span>")
     stats = BooleanField("Has Data Access", description="<span>Has Data Access</span>")

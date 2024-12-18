@@ -1,5 +1,6 @@
 {% extends "layout/layout.jinja" %}
 {% from "utils/form.jinja" import render_form %}
+{% from "utils/back.jinja" import back %}
 {% set highlight_tab = "manage" %}
 {% block main %}
 <link rel="stylesheet" href="/static/styles/admin/upload.css">
@@ -10,5 +11,5 @@
     </a>
 </h4>
 {{render_form(form, 'enctype="multipart/form-data"')}}
-{% include "utils/back.jinja" %}
+{{ back("/manage") }}
 {% endblock %}

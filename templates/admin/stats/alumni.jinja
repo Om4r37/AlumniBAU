@@ -1,11 +1,12 @@
 {% extends "layout/layout.jinja" %}
 {% set highlight_tab = "stats" %}
 {% set title = "Data Table"%}
+{% from "utils/back.jinja" import back %}
 {% block main %}
 {% if alumni %}
 <link rel="stylesheet" href="/static/styles/admin/table.css">
 <div class="container">
-    {% include "utils/back.jinja" %}
+    {{ back("/stats") }}
     <h2>Alumni Data</h2>
     <a href="/alumni">
         <button>
