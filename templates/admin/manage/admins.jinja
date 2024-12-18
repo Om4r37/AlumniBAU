@@ -2,8 +2,8 @@
 {% set highlight_tab = "manage" %}
 {% from "utils/back.jinja" import back %}
 {% block main %}
-{% if admins %}
 <link rel="stylesheet" href="/static/styles/admin/table.css">
+{% if admins %}
 <script src="static/scripts/TableFilter/tablefilter.js"></script>
 <div class="container" style="max-width: 1000px;">
     {{ back("/manage") }}
@@ -69,5 +69,9 @@ main {
 }
 </style>
 <h3>There's no admins to manage.</h3>
+<button>
+    <img src="/static/pics/icons/admin/add.svg">
+    Add Admin
+</button>
 {% endif %}
 {% endblock %}
