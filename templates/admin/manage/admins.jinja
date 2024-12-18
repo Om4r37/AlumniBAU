@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/static/styles/admin/table.css">
 <script src="static/scripts/TableFilter/tablefilter.js"></script>
 <div class="container" style="max-width: 1000px;">
-    <div></div>
+    {% include "utils/back.jinja" %}
     <h2>Admins</h2>
     <a href="/add">
         <button>
@@ -22,6 +22,7 @@
                 <th class="sorttable_nosort">Can Announce</th>
                 <th class="sorttable_nosort">Has Data Access</th>
                 <th class="sorttable_nosort">Is Moderator</th>
+                <th class="sorttable_nosort">Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
                 <td>{% if admin.announce %} Yes {% else %} No {% endif %}</td>
                 <td>{% if admin.stats %} Yes {% else %} No {% endif %}</td>
                 <td>{% if admin.mod %} Yes {% else %} No {% endif %}</td>
+                <td><a href="/edit?id={{admin.id}}"><img src="/static/pics/icons/admin/edit.svg"></a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -45,6 +47,7 @@
         col_2: "select",
         col_3: "select",
         col_4: "select",
+        col_5: "none",
         popup_filters: true,
         mark_active_columns: true,
         highlight_keywords: true,

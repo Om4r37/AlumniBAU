@@ -27,6 +27,20 @@ class repo:
             announce,
             alumni_data,
         )
+    
+    @staticmethod
+    def add_admin(data):
+        id = repo.get_last_user_id() + 1
+        return db.execute(
+            "INSERT INTO admins (id, username, password_hash, mod, manage, announce, stats) VALUES (?, ?, ?, ?, ?, ?, ?);",
+            id,
+            data["username"],
+            generate_password_hash(data["password"]),
+            data["mod"],
+            data["manage"],
+            data["announce"],
+            data["stats"],
+        )
 
     @staticmethod
     def get_admins(username):
@@ -35,6 +49,10 @@ class repo:
     @staticmethod
     def get_admin(username):
         return repo.get_admins(username)[0]
+
+    @staticmethod
+    def get_admin_by_id(id):
+        return db.execute("SELECT * FROM admins WHERE id = ?;", id)[0]
 
     @staticmethod
     def get_all_admins():

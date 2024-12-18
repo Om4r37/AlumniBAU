@@ -10,6 +10,7 @@ form {
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
     text-align: center;
     max-width: 19rem;
+    margin-bottom: 1rem;
 }
 
 form>input,
@@ -59,4 +60,8 @@ input[type="submit"] {
 
 input[type="file"] {
     transform: translateY(-1rem);
+}
+
+main {
+    text-align: center;
 }

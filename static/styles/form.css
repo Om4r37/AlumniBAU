@@ -1,0 +1,143 @@
+form {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+    max-width: 350px;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+form>* {
+    margin-left: 0.5rem !important;
+}
+
+.input-container {
+    position: relative;
+}
+
+input,
+.form button {
+    outline: none;
+    border: 1px solid #e5e7eb;
+    margin: 8px 0;
+}
+
+input:not([type="checkbox"], [type="submit"]) {
+    background-color: #fff;
+    padding: 1rem;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    width: 90%;
+    max-width: 300px;
+}
+
+.submit {
+    display: block;
+    padding: 0.75rem 1rem;
+    background-color: #006226f5;
+    color: #ffffff;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    width: 90%;
+    max-width: 300px;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    border: none;
+    cursor: pointer;
+    margin-left: 50% !important;
+    transform: translateX(-50%);
+}
+
+.signup-link {
+    color: #6c806b;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    text-align: center;
+}
+
+.signup-link a {
+    text-decoration: underline;
+    color: #55bd40;
+}
+
+input:user-invalid {
+    border-color: #e53e3e;
+}
+
+input:user-valid {
+    border-color: #34d35c;
+}
+
+#eye {
+    color: #6d806b;
+    cursor: pointer;
+    width: 1rem;
+}
+
+form>span {
+    transform: translate(1.5rem, -1.5rem);
+}
+
+@media (max-width: 787px) {
+    .navbar {
+        width: calc(100vw - 3.5rem);
+    }
+}
+
+#role {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    justify-content: center;
+    list-style-type: none;
+    margin-left: 30% !important;
+    transform: translateX(-30%);
+}
+
+#role input[type="radio"] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+#role input[type="radio"]:checked+label {
+    box-shadow: 0 0 0 0.0625em #006226f5;
+    background-color: #deffe9;
+    z-index: 1;
+    color: #006226f5;
+}
+
+li label {
+    display: block;
+    cursor: pointer;
+    background-color: #fff;
+    padding: 0.375em .75em;
+    position: relative;
+    margin-left: .0625em;
+    box-shadow: 0 0 0 0.0625em #b5d9b8;
+    letter-spacing: .05em;
+    color: #3e6344;
+    text-align: center;
+    transition: background-color .5s ease;
+}
+
+li:first-child label {
+    border-radius: .375em 0 0 .375em;
+}
+
+li:last-child label {
+    border-radius: 0 .375em .375em 0;
+}
