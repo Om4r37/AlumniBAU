@@ -2,6 +2,7 @@
 {% set highlight_tab = "manage" %}
 {% from "utils/back.jinja" import back %}
 {% block main %}
+{% if admins %}
 <link rel="stylesheet" href="/static/styles/admin/table.css">
 <script src="static/scripts/TableFilter/tablefilter.js"></script>
 <div class="container" style="max-width: 1000px;">
@@ -61,4 +62,12 @@
     var tf = new TableFilter(document.querySelector("table"), tfConfig);
     tf.init();
 </script>
+{% else %}
+<style>
+main {
+    text-align: center;
+}
+</style>
+<h3>There's no admins to manage.</h3>
+{% endif %}
 {% endblock %}
