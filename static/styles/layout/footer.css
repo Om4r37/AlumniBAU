@@ -45,7 +45,7 @@ main {
     filter: invert(0.1);
 }
 
-.card {
+.social-container {
     width: fit-content;
     height: fit-content;
     background-color: transparent;

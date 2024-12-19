@@ -1,0 +1,15 @@
+{% extends "layout/layout.jinja" %}
+{% block main %}
+<link rel="stylesheet" href="/static/styles/jobs.css">
+<div id="container">
+    <h1>Hiring Platforms</h1>
+    <div class="grid-container">
+{% for platform in platforms %}
+        <a href="{{platform.url}}" class="card">
+            <img src="{{ platform.logo }}">
+            <h2>{{ platform.name }}</h2>
+        </a>
+{% endfor %}
+    </div>
+</div>
+{% endblock %}
