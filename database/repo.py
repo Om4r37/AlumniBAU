@@ -1,8 +1,10 @@
+import sqlite3
 from database.database import db
 from werkzeug.security import generate_password_hash
 from io import StringIO
 import csv
 from datetime import datetime
+from werkzeug.utils import secure_filename
 
 
 class repo:
@@ -27,7 +29,7 @@ class repo:
             announce,
             alumni_data,
         )
-    
+
     @staticmethod
     def add_admin(data):
         id = repo.get_last_user_id() + 1
@@ -88,10 +90,18 @@ class repo:
             alumnus["marital_status"] = int(alumnus["marital_status_id"])
 
         alumnus["is_completed"] = (
-            alumnus.get("email")
-            and alumnus.get("phone_number")
-            and alumnus.get("home_address")
-            and alumnus.get("marital_status_id")
+            all(
+                [
+                    alumnus.get(x)
+                    for x in [
+                        "email",
+                        "phone_number",
+                        "home_address",
+                        "marital_status_id",
+                    ]
+                ]
+            )
+            and int(alumnus.get("marital_status_id")) != 1
         )
 
         return alumnus
@@ -148,6 +158,24 @@ class repo:
         )
 
     @staticmethod
+    def get_cv(alumnus):
+        alumnus["is_completed"] = alumnus.get("cv") and alumnus.get("cv_file_name")
+        return alumnus
+    
+    @staticmethod
+    def get_cv_file(id):
+        return db.execute("SELECT cv, cv_file_name FROM alumni WHERE id = ?;", id)[0]
+
+    @staticmethod
+    def update_cv(data, id):
+        db.execute(
+            "UPDATE alumni SET cv = ?, cv_file_name = ? WHERE id = ?;",
+            sqlite3.Binary(data["cv"].read()),
+            secure_filename(data["cv"].filename),
+            id,
+        )
+
+    @staticmethod
     def get_employment(alumnus):
         if alumnus.get("work"):
             alumnus["does_work"] = 1 if alumnus["work"] else 2
@@ -156,40 +184,54 @@ class repo:
             alumnus["reason"] = alumnus["work_reason"]
 
         if alumnus.get("public_sector"):
-            alumnus["sector"] = (
-                1 if alumnus["public_sector"] else 2
-            )
-        
+            alumnus["sector"] = 1 if alumnus["public_sector"] else 2
+
         if alumnus.get("work_start_date"):
             alumnus["date"] = datetime.strptime(alumnus["work_start_date"], "%Y-%m-%d")
-        
+
         if alumnus.get("work_place"):
             alumnus["place"] = alumnus["work_place"]
-        
+
         if alumnus.get("work_address"):
             alumnus["address"] = alumnus["work_address"]
 
         if alumnus.get("work_phone"):
             alumnus["phone"] = alumnus["work_phone"]
 
-        alumnus["is_completed"] = alumnus.get("does_work") and alumnus.get("sector")
-        return alumnus
+        if alumnus.get("work_position"):
+            alumnus["title"] = alumnus["work_position"]
 
+        alumnus["is_completed"] = alumnus.get("work_reason") or all(
+            [
+                alumnus.get(x)
+                for x in [
+                    "public_sector",
+                    "work_place",
+                    "work_start_date",
+                    "work_address",
+                    "work_phone",
+                    "work_position",
+                ]
+            ]
+        )
+        return alumnus
 
     @staticmethod
     def update_employment(data, id):
+        print(data)
         db.execute(
-            """UPDATE alumni SET work = ?, public_sector = ?, work_place = ?, work_start_date = ?, work_address = ?, work_phone = ?, submitted = ? WHERE id = ?;""",
+            """UPDATE alumni SET work = ?, public_sector = ?, work_place = ?, work_start_date = ?, work_address = ?, work_phone = ?, work_reason = ?, work_position = ?, submitted = ? WHERE id = ?;""",
             1 if data["does_work"] == 1 else 0 if data["does_work"] == 2 else None,
             1 if data["sector"] == 1 else 0 if data["sector"] == 2 else None,
             data["place"],
             data["date"],
             data["address"],
             data["phone"],
+            data["reason"],
+            data["title"],
             1,
             id,
         )
-
 
     @staticmethod
     def get_feedback(alumnus):

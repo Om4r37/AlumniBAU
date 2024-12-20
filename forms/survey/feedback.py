@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from wtforms.validators import InputRequired
 from wtforms import SelectField, TextAreaField, SubmitField
 
 
@@ -20,5 +21,7 @@ class FeedbackForm(FlaskForm):
         choices=[(0, "Select"), (1, "Yes"), (2, "No")],
         coerce=int,
     )
-    suggestion = TextAreaField("Do you have any suggestions?")
+    suggestion = TextAreaField(
+        "Do you have any suggestions?", validators=[InputRequired()]
+    )
     save = SubmitField()

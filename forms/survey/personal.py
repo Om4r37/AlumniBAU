@@ -11,11 +11,11 @@ class PersonalForm(FlaskForm):
     home_address = StringField()
     marital_status = SelectField(
         choices=[
-            ("0", "Select"),
-            (1, "Single"),
-            (2, "Married"),
-            (3, "Divorced"),
-            (4, "Widowed"),
+            (1, "Select"),
+            (2, "Single"),
+            (3, "Married"),
+            (4, "Divorced"),
+            (5, "Widowed"),
         ],
         coerce=int,
     )

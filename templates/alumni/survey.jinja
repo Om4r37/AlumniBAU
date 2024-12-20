@@ -3,7 +3,6 @@
 {% set highlight_tab = "survey" %}
 {% block main %} 
 <link href="/static/styles/alumni/survey.css" rel="stylesheet">
-<script src="/static/scripts/survey.js" defer></script>
 <div id="survey">
     <h1>Survey</h1>
     {% for form in forms %}
@@ -13,4 +12,5 @@
         </details>
     {% endfor %}
 </div>
+<script src="/static/scripts/survey.js"></script>
 {% endblock %}

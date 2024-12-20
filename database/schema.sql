@@ -84,6 +84,7 @@ CREATE TABLE alumni (
 
     -- work
     cv BLOB,
+    cv_file_name TEXT,
     work_reason TEXT,
     work_position TEXT,
 

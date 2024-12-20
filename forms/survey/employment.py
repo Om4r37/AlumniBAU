@@ -5,7 +5,6 @@ from wtforms import (
     StringField,
     DateField,
     IntegerField,
-    FileField,
     SubmitField,
 )
 
@@ -13,11 +12,11 @@ from wtforms import (
 class EmploymentForm(FlaskForm):
     form_title = "Employment"
     route = "/employment"
-    cv = FileField("Upload CV")
     does_work = SelectField(
         "Are you currently working?",
         choices=[(0, "Select"), (1, "Yes"), (2, "No")],
         coerce=int,
+        render_kw={"onchange": "employment()"},
     )
     reason = TextAreaField("What reasons prevented you from working?")
     sector = SelectField(
