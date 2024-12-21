@@ -1,0 +1,15 @@
+{% extends "layout/layout.jinja" %}
+{% set highlight_tab = "profile" %}
+{% from "utils/form.jinja" import render_form %}
+{% from "utils/back.jinja" import back %}
+{% block main %}
+<link href="/static/styles/alumni/pfp.css" rel="stylesheet">
+<script>
+var loadFile = function (event) {
+    var image = document.getElementById("output");
+    image.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>
+{{ render_form(form) }}
+{{ back("profile") }}
+{% endblock %}

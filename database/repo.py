@@ -85,6 +85,10 @@ class repo:
         return dict(alumni[0]) if len(alumni) else None
 
     @staticmethod
+    def get_alumnus_by_id(id):
+        return db.execute("SELECT * FROM alumni WHERE id = ?;", id)[0]
+
+    @staticmethod
     def get_personal(alumnus):
         if alumnus.get("marital_status_id"):
             alumnus["marital_status"] = int(alumnus["marital_status_id"])
@@ -267,6 +271,18 @@ class repo:
                 else 0 if data["supports_club"] == 2 else None
             ),
             1,
+            id,
+        )
+
+    @staticmethod
+    def get_pfp(id):
+        return db.execute("SELECT profile_picture FROM users WHERE id = ?;", id)[0]
+
+    @staticmethod
+    def update_pfp(id, pfp):
+        db.execute(
+            "UPDATE users SET profile_picture = ? WHERE id = ?;",
+            sqlite3.Binary(pfp.read()),
             id,
         )
 

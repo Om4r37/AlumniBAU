@@ -1,8 +1,7 @@
 form {
     width: 50vw;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
     justify-items: center;
     background-color: white;
     padding: 1rem;

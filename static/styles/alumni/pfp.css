@@ -1,0 +1,38 @@
+form {
+    width: 50vw;
+    display: block;
+    margin-inline: auto;
+    justify-items: center;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 19rem;
+    margin-bottom: 1rem;
+}
+
+form>img {
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    height: 16rem;
+    width: 16rem;
+}
+
+input {
+    margin-top: 1rem;
+}
+
+main {
+    text-align: center;
+}
+
+#submit {
+    background-color: #006226f5;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}

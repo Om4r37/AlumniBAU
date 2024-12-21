@@ -70,7 +70,7 @@ class Accordion {
         this.animation = this.el.animate({
             height: [startHeight, endHeight]
         }, {
-            duration: 400,
+            duration: 300,
             easing: 'ease-out'
         });
         this.animation.onfinish = () => this.onAnimationFinish(false);
@@ -91,7 +91,7 @@ class Accordion {
         this.animation = this.el.animate({
             height: [startHeight, endHeight]
         }, {
-            duration: 400,
+            duration: 300,
             easing: 'ease-out'
         });
         this.animation.onfinish = () => this.onAnimationFinish(true);

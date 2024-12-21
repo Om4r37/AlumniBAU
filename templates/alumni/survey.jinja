@@ -5,12 +5,12 @@
 <link href="/static/styles/alumni/survey.css" rel="stylesheet">
 <div id="survey">
     <h1>Survey</h1>
-    {% for form in forms %}
-        <details {% if form.is_completed %}class="completed"{% else %}open{% endif %}>
-            <summary><span>{{ form.form_title }}</span></summary>
-            {{ render_form(form) }}
-        </details>
-    {% endfor %}
+{% for form in forms %}
+    <details {% if form.is_completed %}class="completed"{% else %}open{% endif %}>
+        <summary><span>{{ form.form_title }}</span></summary>
+        {{ render_form(form) }}
+    </details>
+{% endfor %}
 </div>
 <script src="/static/scripts/survey.js"></script>
 {% endblock %}
