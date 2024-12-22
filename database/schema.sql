@@ -265,11 +265,11 @@ CREATE TABLE stats (
 INSERT INTO stats DEFAULT VALUES;
 
 CREATE TRIGGER add_admin AFTER INSERT ON admins BEGIN
-    INSERT INTO users (id, name) VALUES (NEW.id, NEW.username);
+    INSERT INTO users (id, display_name) VALUES (NEW.id, NEW.username);
 END;
 
 CREATE TRIGGER add_alumni AFTER INSERT ON alumni BEGIN
-    INSERT INTO users (id, name, phone_number, email) VALUES (NEW.id, NEW.full_name, NEW.phone_number, NEW.email);
+    INSERT INTO users (id, phone_number, email) VALUES (NEW.id, NEW.phone_number, NEW.email);
     UPDATE stats SET alumni_count = alumni_count + 1;
 
     -- gender

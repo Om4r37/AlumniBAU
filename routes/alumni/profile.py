@@ -30,8 +30,7 @@ def pfp():
     id = session.get("id")
     pfp = dict(repo.get_pfp(id))
     form = PFPForm(data=pfp)
-    if pfp.get("profile_picture"):
-        form.file.label = f'<img id="output" src="data:image/png;base64,{base64.b64encode(pfp.get('profile_picture')).decode()}"/>'
+    form.file.label = f'<img id="output" src="data:image/png;base64,{base64.b64encode(pfp.get('profile_picture')).decode()}"/>'
     if form.validate_on_submit():
         repo.update_pfp(id, form.file.data)
         form.file.label = f'<img id="output" src="data:image/png;base64,{base64.b64encode(pfp.get('profile_picture')).decode()}"/>'

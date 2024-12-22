@@ -276,7 +276,8 @@ class repo:
 
     @staticmethod
     def get_pfp(id):
-        return db.execute("SELECT profile_picture FROM users WHERE id = ?;", id)[0]
+        pfp = dict(db.execute("SELECT profile_picture FROM users WHERE id = ?;", id)[0])
+        return pfp if pfp.get("profile_picture") else {"profile_picture": open("static/pics/pfp.png", "rb").read()}
 
     @staticmethod
     def update_pfp(id, pfp):
