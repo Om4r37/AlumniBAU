@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField
 from wtforms.widgets import PasswordInput
 from wtforms.validators import InputRequired, Length
+from config import DEBUG
 
 
 class LoginForm(FlaskForm):
@@ -24,6 +25,10 @@ class LoginForm(FlaskForm):
         validators=[InputRequired(), Length(min=1, max=100)],
         render_kw={"placeholder": "Enter your password", "id": "password"},
         widget=PasswordInput(hide_value=False),
+    ) if DEBUG else PasswordField(
+        "Password",
+        validators=[InputRequired(), Length(min=1, max=100)],
+        render_kw={"placeholder": "Enter your password", "id": "password"},
     )
 
     show_password = BooleanField(

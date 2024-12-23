@@ -3,5 +3,7 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import InputRequired
 
 class hashFileForm(FlaskForm):
-    file_path = StringField("Enter full file path:", validators=[InputRequired()])
+    form_title = "Enter the absolute path:"
+    route = "/hash"
+    file_path = StringField(validators=[InputRequired()])
     submit = SubmitField("Submit")

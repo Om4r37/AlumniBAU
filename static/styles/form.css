@@ -136,6 +136,7 @@ li label {
     color: #3e6344;
     text-align: center;
     transition: background-color .5s ease;
+    margin-top: -1rem;
 }
 
 li:first-child label {
