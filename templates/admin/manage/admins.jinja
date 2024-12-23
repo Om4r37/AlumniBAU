@@ -1,6 +1,7 @@
 {% extends "layout/layout.jinja" %}
-{% set highlight_tab = "manage" %}
 {% from "utils/back.jinja" import back %}
+{% set highlight_tab = "manage" %}
+{% set title = "Manage Admins" %}
 {% block main %}
 <link rel="stylesheet" href="/static/styles/admin/table.css">
 {% if admins %}
