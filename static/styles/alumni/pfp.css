@@ -36,3 +36,7 @@ main {
     border-radius: 0.5rem;
     cursor: pointer;
 }
+
+input[type="file"] {
+    margin-left: 1rem;
+}

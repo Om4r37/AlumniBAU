@@ -12,7 +12,7 @@ main img:not(li img) {
 body {
     margin-top: 5vh;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #e9f6e6;
     justify-content: center;
     align-items: center;
     height: 100vh;

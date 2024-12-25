@@ -26,18 +26,6 @@ def create_app():
     ]:
         app.register_blueprint(blueprint.bp)
 
-    # Disable caching
-    app.jinja_env.cache = None
-    app.config["TEMPLATES_AUTO_RELOAD"] = True
-
-    @app.after_request
-    def after_request(response):
-        """Ensure responses aren't cached"""
-        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-        response.headers["Expires"] = 0
-        response.headers["Pragma"] = "no-cache"
-        return response
-
     @app.errorhandler(404)
     def not_found(e):
         return render_template("error.jinja", message=str(e))
@@ -47,5 +35,17 @@ def create_app():
         print(app.url_map)
         print(app.url_map._rules)
         print(app.url_map._rules_by_endpoint)
+
+        # Disable caching
+        app.jinja_env.cache = None
+        app.config["TEMPLATES_AUTO_RELOAD"] = True
+
+        @app.after_request
+        def after_request(response):
+            """Ensure responses aren't cached"""
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response.headers["Expires"] = 0
+            response.headers["Pragma"] = "no-cache"
+            return response
 
     return app

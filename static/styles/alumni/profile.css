@@ -68,3 +68,13 @@
 .submit {
     margin-top: 5rem !important;
 }
+
+.edit {
+    margin-left: 8rem;
+}
+
+.profile-row {
+    display: flex;
+    margin-top: 1rem;
+    font-size: large;
+}

@@ -8,3 +8,7 @@
     margin-inline: calc(50% - 12.5rem);
     transform: translateX(-4rem);
 }
+
+form>* {
+    margin-left: 0.5rem !important;
+}

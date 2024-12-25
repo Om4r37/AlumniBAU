@@ -95,9 +95,9 @@ CREATE TABLE alumni (
     suggestion TEXT,
 
     -- privacy settings
-    personal_info_privacy BOOLEAN NOT NULL DEFAULT 1,
-    academic_info_privacy BOOLEAN NOT NULL DEFAULT 1,
-    work_info_privacy BOOLEAN NOT NULL DEFAULT 1,
+    personal_privacy BOOLEAN NOT NULL DEFAULT 1,
+    academic_privacy BOOLEAN NOT NULL DEFAULT 1,
+    employment_privacy BOOLEAN NOT NULL DEFAULT 1,
 
     FOREIGN KEY (id) REFERENCES users(id),
     FOREIGN KEY (major_id) REFERENCES majors(id),

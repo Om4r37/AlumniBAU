@@ -5,7 +5,7 @@ from wtforms.validators import InputRequired
 
 class EditAlumniProfileForm(FlaskForm):
     form_title = "Your Profile"
-    route = "/profile?edit=1"
+    route = "/edit_profile"
     pfp = StringField(label='', render_kw={"class": "pfp", "type": "hidden"})
     display_name = StringField(
         "Display Name",
@@ -15,22 +15,19 @@ class EditAlumniProfileForm(FlaskForm):
     )
     personal_privacy = RadioField(
         description="Personal Information Privacy:",
-        choices=[("Public"), ("Private")],
-        default="Public",
+        choices=[(1, "Public"), (0, "Private")],
         validators=[InputRequired()],
         render_kw={"class": "radio"},
     )
     academic_privacy = RadioField(
         description="Academic Information Privacy:",
-        choices=[("Public"), ("Private")],
-        default="Public",
+        choices=[(1, "Public"), (0, "Private")],
         validators=[InputRequired()],
         render_kw={"class": "radio"},
     )
     employment_privacy = RadioField(
         description="Employment Information Privacy:",
-        choices=[("Public"), ("Private")],
-        default="Public",
+        choices=[(1, "Public"), (0, "Private")],
         validators=[InputRequired()],
         render_kw={"class": "radio"},
     )

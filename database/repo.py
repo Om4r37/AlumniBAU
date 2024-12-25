@@ -27,7 +27,7 @@ class repo:
             id,
         )
         db.execute(
-            "UPDATE alumni SET personal_info_privacy = ?, academic_info_privacy = ?, employment_info_privacy = ? WHERE id = ?;",
+            "UPDATE alumni SET personal_privacy = ?, academic_privacy = ?, employment_privacy = ? WHERE id = ?;",
             data["personal_privacy"],
             data["academic_privacy"],
             data["employment_privacy"],
@@ -107,22 +107,56 @@ class repo:
         return db.execute("SELECT * FROM alumni WHERE id = ?;", id)[0]
 
     @staticmethod
+    def get_marital_status_by_id(id):
+        return db.execute("SELECT name FROM marital_status WHERE id = ?;", id)[0][
+            "name"
+        ]
+
+    @staticmethod
+    def get_major_by_id(id):
+        return db.execute("SELECT name FROM majors WHERE id = ?;", id)[0]["name"]
+
+    @staticmethod
+    def get_degree_by_id(id):
+        return db.execute("SELECT name FROM degrees WHERE id = ?;", id)[0]["name"]
+
+    @staticmethod
     def get_alumnus_public_profile(id):
         alumnus = dict(repo.get_alumnus_by_id(id))
         user = dict(repo.get_user(id))
-        personal_info = dict(repo.get_personal(alumnus))
-        academic_info = dict(repo.get_academic(alumnus))
-        employment_info = dict(repo.get_employment(alumnus))
         data = {
-            "display_name": user.get("display_name"),
+            "Display Name": user.get("display_name"),
         }
-        if alumnus.get("personal_info_privacy"):
-            data.update(personal_info)
-        if alumnus.get("academic_info_privacy"):
-            data.update(academic_info)
-        if alumnus.get("employment_info_privacy"):
-            data.update(employment_info)
+        if alumnus.get("personal_privacy"):
+            if alumnus.get("email"): data["Email"] = alumnus.get("email")
+            if alumnus.get("phone_number"): data["Phone Number"] = alumnus.get("phone_number")
+            if alumnus.get("home_address"): data["Home Address"] = alumnus.get("home_address")
+            if alumnus.get("marital_status_id") != 1: data["Marital Status"] = repo.get_marital_status_by_id(
+                alumnus.get("marital_status_id")
+            )
+        if alumnus.get("academic_privacy"):
+            data["Major"] = repo.get_major_by_id(alumnus.get("major_id"))
+            data["Degree"] = repo.get_degree_by_id(alumnus.get("degree_id"))
+            data["GPA"] = alumnus.get("GPA") / 100
+            data["Graduation Year"] = alumnus.get("graduation_year")
+        if alumnus.get("employment_privacy"):
+            if alumnus.get("work_place"): data["Work Place"] = alumnus.get("work_place")
+            if alumnus.get("work_start_date"): data["Work Start Date"] = alumnus.get("work_start_date")
+            if alumnus.get("work_address"): data["Work Address"] = alumnus.get("work_address")
+            if alumnus.get("public_sector"): data["Sector"] = "Public" if alumnus.get("public_sector") else "Private"
+            if alumnus.get("work_phone"): data["Work Phone"] = alumnus.get("work_phone")
         return data
+
+    @staticmethod
+    def get_user_public_profile(id):
+        if repo.get_alumnus_by_id(id):
+            return repo.get_alumnus_public_profile(id)
+        user = dict(repo.get_user(id))
+        return (
+            {"Display Name": user.get("display_name")}
+            if user.get("display_name")
+            else {}
+        )
 
     @staticmethod
     def get_personal(alumnus):
@@ -261,7 +295,6 @@ class repo:
 
     @staticmethod
     def update_employment(data, id):
-        print(data)
         db.execute(
             """UPDATE alumni SET work = ?, public_sector = ?, work_place = ?, work_start_date = ?, work_address = ?, work_phone = ?, work_reason = ?, work_position = ?, submitted = ? WHERE id = ?;""",
             1 if data["does_work"] == 1 else 0 if data["does_work"] == 2 else None,

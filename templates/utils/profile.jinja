@@ -1,17 +1,17 @@
 {% macro render_profile(fields) %}
 <form class="profile">
-    <img class="image" src="data:image/png;base64,{{fields.pfp}}"/>
+    <img class="centered image" src="data:image/png;base64,{{fields.pfp}}"/>
 {% for k, v in fields.items() %}
     {% if k not in ["edit", "pfp"] %}
     <div class="profile-row">
-        <div class="profile-label">{{ k }}:</div>
+        <div class="profile-label"><b>{{ k }}:&nbsp;</b></div>
         <div class="profile-value">{{ v }}</div>
     </div>
     {% endif %}
 {% endfor %}
 {% if fields.edit %}
     <div class="profile-row">
-        <a href="/profile?edit=1" class="edit">Edit</a>
+        <a href="/edit_profile" class="edit text">Edit</a>
     </div>
 {% endif %}
 </form>
