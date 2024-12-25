@@ -174,6 +174,7 @@ class repo:
             user.update(dict(repo.get_alumnus_by_id(id)))
             user.pop("password_hash")
             user.pop("nno_hash")
+            user.pop("profile_picture")
         return user
 
     @staticmethod

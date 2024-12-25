@@ -18,7 +18,7 @@
     max-width: 100%;
     object-fit: cover;
     border-radius: 50%;
-    margin-left: 50%;
+    margin-left: 60%;
     width: var(--image-width);
     height: var(--image-width);
 }
@@ -70,7 +70,7 @@
 }
 
 .edit {
-    margin-left: 8rem;
+    margin-left: 11rem;
 }
 
 .profile-row {
@@ -82,4 +82,8 @@
 
 form {
     max-width: 440px !important;
+}
+
+form > label, form > input {
+    margin-left: 3rem;
 }

@@ -30,15 +30,15 @@ def create_app():
     def not_found(e):
         return render_template("error.jinja", message=str(e))
 
+    # Disable caching
+    app.jinja_env.cache = None
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
+
     if app.config["DEBUG"]:
         print(app.config)
         print(app.url_map)
         print(app.url_map._rules)
         print(app.url_map._rules_by_endpoint)
-
-        # Disable caching
-        app.jinja_env.cache = None
-        app.config["TEMPLATES_AUTO_RELOAD"] = True
 
         @app.after_request
         def after_request(response):
