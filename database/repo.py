@@ -165,7 +165,7 @@ class repo:
     def get_cv(alumnus):
         alumnus["is_completed"] = alumnus.get("cv") and alumnus.get("cv_file_name")
         return alumnus
-    
+
     @staticmethod
     def get_cv_file(id):
         return db.execute("SELECT cv, cv_file_name FROM alumni WHERE id = ?;", id)[0]
@@ -181,7 +181,7 @@ class repo:
 
     @staticmethod
     def get_employment(alumnus):
-        if alumnus.get("work"):
+        if alumnus.get("work") is not None:
             alumnus["does_work"] = 1 if alumnus["work"] else 2
 
         if alumnus.get("work_reason"):
@@ -205,18 +205,21 @@ class repo:
         if alumnus.get("work_position"):
             alumnus["title"] = alumnus["work_position"]
 
-        alumnus["is_completed"] = alumnus.get("work_reason") or all(
-            [
-                alumnus.get(x)
-                for x in [
-                    "public_sector",
-                    "work_place",
-                    "work_start_date",
-                    "work_address",
-                    "work_phone",
-                    "work_position",
+        alumnus["is_completed"] = alumnus.get("does_work") and (
+            alumnus.get("work_reason")
+            or all(
+                [
+                    alumnus.get(x)
+                    for x in [
+                        "public_sector",
+                        "work_place",
+                        "work_start_date",
+                        "work_address",
+                        "work_phone",
+                        "work_position",
+                    ]
                 ]
-            ]
+            )
         )
         return alumnus
 
@@ -277,7 +280,11 @@ class repo:
     @staticmethod
     def get_pfp(id):
         pfp = dict(db.execute("SELECT profile_picture FROM users WHERE id = ?;", id)[0])
-        return pfp if pfp.get("profile_picture") else {"profile_picture": open("static/pics/pfp.png", "rb").read()}
+        return (
+            pfp
+            if pfp.get("profile_picture")
+            else {"profile_picture": open("static/pics/pfp.png", "rb").read()}
+        )
 
     @staticmethod
     def update_pfp(id, pfp):

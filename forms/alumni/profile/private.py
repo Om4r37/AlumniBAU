@@ -10,3 +10,8 @@ class PrivateProfileForm(FlaskForm):
         validators=[FileAllowed(["jpg", "png", "jpeg"], "Images only!")],
         render_kw={"onchange": "loadFile(event)"},
     )
+    display_name = StringField(
+        "Display Name",
+        render_kw={"placeholder": "Enter your display_name", "autofocus": "true"},
+    )
+    submit = SubmitField("Update", render_kw={"class": "submit"})
