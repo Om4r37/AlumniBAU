@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 
-class AdminProfileForm(FlaskForm):
+class EditAdminProfileForm(FlaskForm):
     form_title = 'Admin Profile'
     route = "/profile"
     display_name = StringField(

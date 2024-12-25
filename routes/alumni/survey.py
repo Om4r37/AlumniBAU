@@ -1,11 +1,11 @@
 from flask import Blueprint, redirect, render_template, request, session, send_file
 from utils import alumni_required
 from database.repo import repo
-from forms.alumni.survey.personal import PersonalForm
-from forms.alumni.survey.academic import AcademicForm
-from forms.alumni.survey.cv import CVForm
-from forms.alumni.survey.employment import EmploymentForm
-from forms.alumni.survey.feedback import FeedbackForm
+from forms.survey.personal import PersonalForm
+from forms.survey.academic import AcademicForm
+from forms.survey.cv import CVForm
+from forms.survey.employment import EmploymentForm
+from forms.survey.feedback import FeedbackForm
 from io import BytesIO
 
 bp = Blueprint("survey", __name__)

@@ -1,8 +1,11 @@
 {% extends "layout/layout.jinja" %}
 {% from "utils/form.jinja" import render_form %}
+{% from "utils/back.jinja" import back %}
 {% set highlight_tab = "profile" %}
 {% set title = "Profile" %}
 {% block main %}
 <link rel="stylesheet" href="/static/styles/alumni/profile.css">
+<link href="/static/styles/form.css" rel="stylesheet">
 {{ render_form(form) }}
+{{ back("/profile") }}
 {% endblock %}

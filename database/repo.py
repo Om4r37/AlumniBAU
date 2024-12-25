@@ -16,6 +16,25 @@ class repo:
         return db.execute("SELECT * FROM users")
 
     @staticmethod
+    def get_user(id):
+        return db.execute("SELECT * FROM users WHERE id = ?;", id)[0]
+
+    @staticmethod
+    def edit_alumni_profile(data, id):
+        db.execute(
+            "UPDATE users SET display_name = ? WHERE id = ?;",
+            data["display_name"],
+            id,
+        )
+        db.execute(
+            "UPDATE alumni SET personal_info_privacy = ?, academic_info_privacy = ?, employment_info_privacy = ? WHERE id = ?;",
+            data["personal_privacy"],
+            data["academic_privacy"],
+            data["employment_privacy"],
+            id,
+        )
+
+    @staticmethod
     def add_admin(id, username, password, name, manage, announce, alumni_data, mod):
         return db.execute(
             "INSERT INTO admins (id, username, password_hash, mod, name, manage, announce, alumni_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
@@ -86,6 +105,24 @@ class repo:
     @staticmethod
     def get_alumnus_by_id(id):
         return db.execute("SELECT * FROM alumni WHERE id = ?;", id)[0]
+
+    @staticmethod
+    def get_alumnus_public_profile(id):
+        alumnus = dict(repo.get_alumnus_by_id(id))
+        user = dict(repo.get_user(id))
+        personal_info = dict(repo.get_personal(alumnus))
+        academic_info = dict(repo.get_academic(alumnus))
+        employment_info = dict(repo.get_employment(alumnus))
+        data = {
+            "display_name": user.get("display_name"),
+        }
+        if alumnus.get("personal_info_privacy"):
+            data.update(personal_info)
+        if alumnus.get("academic_info_privacy"):
+            data.update(academic_info)
+        if alumnus.get("employment_info_privacy"):
+            data.update(employment_info)
+        return data
 
     @staticmethod
     def get_personal(alumnus):

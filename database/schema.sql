@@ -51,28 +51,20 @@ CREATE TABLE alumni (
 
     -- constants
     student_id INTEGER NOT NULL UNIQUE,
-    student_id_privacy BOOLEAN DEFAULT 0,
     nno_hash TEXT NOT NULL,
     full_name TEXT,
     nationality TEXT,
-    nationality_privacy BOOLEAN DEFAULT 0,
     gender BOOLEAN,
     GPA INTEGER,
-    GPA_privacy BOOLEAN DEFAULT 0,
     major_id INTEGER,
-    major_privacy BOOLEAN DEFAULT 0,
     degree_id INTEGER,
-    degree_privacy BOOLEAN DEFAULT 0,
     graduation_year INTEGER,
-    graduation_year_privacy BOOLEAN DEFAULT 0,
     graduation_semester INTEGER,
 
     -- variables
     phone_number TEXT,
-    phone_number_privacy BOOLEAN DEFAULT 0,
     work BOOLEAN,
     work_place TEXT,
-    work_place_privacy BOOLEAN DEFAULT 0,
     work_start_date TEXT,
     work_address TEXT,
     public_sector BOOLEAN,
@@ -84,18 +76,14 @@ CREATE TABLE alumni (
 
     -- personal
     email TEXT,
-    email_privacy BOOLEAN DEFAULT 0,
     home_address TEXT,
-    home_address_privacy BOOLEAN DEFAULT 0,
     marital_status_id INTEGER DEFAULT 1,
-    marital_status_privacy BOOLEAN DEFAULT 0,
 
     -- academic
     postgrad_reason TEXT,
 
     -- work
     cv BLOB,
-    cv_privacy BOOLEAN DEFAULT 0,
     cv_file_name TEXT,
     work_reason TEXT,
     work_position TEXT,
@@ -105,6 +93,12 @@ CREATE TABLE alumni (
     follow BOOLEAN,
     club BOOLEAN,
     suggestion TEXT,
+
+    -- privacy settings
+    personal_info_privacy BOOLEAN NOT NULL DEFAULT 1,
+    academic_info_privacy BOOLEAN NOT NULL DEFAULT 1,
+    work_info_privacy BOOLEAN NOT NULL DEFAULT 1,
+
     FOREIGN KEY (id) REFERENCES users(id),
     FOREIGN KEY (major_id) REFERENCES majors(id),
     FOREIGN KEY (marital_status_id) REFERENCES marital_status(id),

@@ -97,17 +97,16 @@ form>span {
     }
 }
 
-#role {
+.radio {
     display: flex;
     flex-wrap: wrap;
     margin-top: 0.5rem;
     justify-content: center;
     list-style-type: none;
-    margin-left: 30% !important;
-    transform: translateX(-30%);
+    margin-left: calc(50% - 7.5rem) !important;
 }
 
-#role input[type="radio"] {
+.radio input[type="radio"] {
     clip: rect(0 0 0 0);
     clip-path: inset(100%);
     height: 1px;
@@ -117,7 +116,7 @@ form>span {
     width: 1px;
 }
 
-#role input[type="radio"]:checked+label {
+.radio input[type="radio"]:checked+label {
     box-shadow: 0 0 0 0.0625em #006226f5;
     background-color: #deffe9;
     z-index: 1;

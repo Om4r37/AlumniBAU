@@ -6,31 +6,33 @@ from config import DEBUG
 
 
 class LoginForm(FlaskForm):
-    form_title = 'Login As:'
-
+    form_title = "Login As:"
     route = "/login"
-    
     role = RadioField(
-        choices=[("Alumni"), ("Admin")], default="Alumni", validators=[InputRequired()]
+        choices=[("Alumni"), ("Admin")],
+        default="Alumni",
+        validators=[InputRequired()],
+        render_kw={"class": "radio"},
     )
-
     username = StringField(
         "Username",
         validators=[InputRequired(), Length(min=1, max=50)],
         render_kw={"placeholder": "Enter your username", "autofocus": "true"},
     )
-
-    password = StringField(
-        "Password",
-        validators=[InputRequired(), Length(min=1, max=100)],
-        render_kw={"placeholder": "Enter your password", "id": "password"},
-        widget=PasswordInput(hide_value=False),
-    ) if DEBUG else PasswordField(
-        "Password",
-        validators=[InputRequired(), Length(min=1, max=100)],
-        render_kw={"placeholder": "Enter your password", "id": "password"},
+    password = (
+        StringField(
+            "Password",
+            validators=[InputRequired(), Length(min=1, max=100)],
+            render_kw={"placeholder": "Enter your password", "id": "password"},
+            widget=PasswordInput(hide_value=False),
+        )
+        if DEBUG
+        else PasswordField(
+            "Password",
+            validators=[InputRequired(), Length(min=1, max=100)],
+            render_kw={"placeholder": "Enter your password", "id": "password"},
+        )
     )
-
     show_password = BooleanField(
         "Show Password",
         description="<span>Show Password</span>",
@@ -39,5 +41,4 @@ class LoginForm(FlaskForm):
             "id": "eye",
         },
     )
-
     submit = SubmitField("Login", render_kw={"class": "submit"})
