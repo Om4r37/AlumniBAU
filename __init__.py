@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFProtect
-from routes import auth, index
-from routes.alumni import survey, news, posts, profile
+from routes import auth, index, profile
+from routes.alumni import survey, news, posts
 from routes.admin import stats, manage, mod, announce
 
 

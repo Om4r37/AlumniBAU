@@ -168,11 +168,13 @@ class repo:
         )
 
     @staticmethod
-    def get_alumnus_full_profile(id):
-        alumnus = dict(repo.get_user(id))
-        alumnus.update(dict(repo.get_alumnus_by_id(id)))
-        return alumnus
-
+    def get_user_full_profile(id):
+        user = dict(repo.get_user(id))
+        if repo.get_alumnus_by_id(id):
+            user.update(dict(repo.get_alumnus_by_id(id)))
+            user.pop("password_hash")
+            user.pop("nno_hash")
+        return user
 
     @staticmethod
     def get_personal(alumnus):

@@ -23,7 +23,7 @@ def profile():
     if session.get("id") == id:
         fields.update({"edit": True})
     elif session.get("role") == "admin" and "stats" in session.get("perms"):
-        fields.update(repo.get_alumnus_full_profile(id))
+        fields.update(repo.get_user_full_profile(id))
     return render_template("alumni/profile/public.jinja", fields=fields)
 
 
