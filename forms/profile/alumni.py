@@ -4,7 +4,7 @@ from wtforms.validators import InputRequired
 
 
 class EditAlumniProfileForm(FlaskForm):
-    form_title = "Your Profile"
+    form_title = "Edit Profile"
     route = "/edit_profile"
     pfp = StringField(label='', render_kw={"class": "pfp", "type": "hidden"})
     display_name = StringField(

@@ -33,7 +33,7 @@
         <tbody>
             {% for alumnus in alumni %}
             <tr>
-                <td>{{ alumnus.student_id }}</td>
+                <td><a href="/profile?id={{ alumnus.id }}">{{ alumnus.student_id }}</a></td>
                 <td>{{ alumnus.full_name }}</td>
                 <td>{{ alumnus.graduation_year }}</td>
                 <td>{{ majors[alumnus.major_id - 1] }}</td>

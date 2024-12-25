@@ -8,5 +8,5 @@ function highlightTab(tabNo) {
     navTabs[tabNo].classList.add('highlight');
     navTabs[tabNo].querySelector('img').src = navbarTabs[tabNo].querySelector('img').src.replace('outline.svg', 'solid.svg');
 }
-highlightTab({{ tabs.index(highlight_tab) if highlight_tab else -1 }});
+highlightTab({{ tabs.index(highlight_tab) if highlight_tab in tabs else -1 }});
 </script>

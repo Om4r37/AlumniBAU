@@ -19,11 +19,11 @@ def profile():
         return redirect(f"/profile?id={session.get('id')}")
 
     fields = repo.get_user_public_profile(id)
-    if session.get("role") == "admin" and "stats" in session.get("perms"):
-        fields = repo.get_alumnus_full_profile(id)
+    fields.update({"pfp": base64.b64encode(repo.get_pfp(id)).decode()})
     if session.get("id") == id:
         fields.update({"edit": True})
-    fields.update({"pfp": base64.b64encode(repo.get_pfp(id)).decode()})
+    elif session.get("role") == "admin" and "stats" in session.get("perms"):
+        fields.update(repo.get_alumnus_full_profile(id))
     return render_template("alumni/profile/public.jinja", fields=fields)
 
 
@@ -44,11 +44,15 @@ def pfp():
 @login_required
 def edit_profile():
     id = session.get("id")
-    data = dict(repo.get_alumnus_by_id(id))
-    data.update(dict(repo.get_user(id)))
-    form = EditAlumniProfileForm(data=data)
+    data = dict(repo.get_user(id))
+    if session.get("role") == "admin":
+        data.update(dict(repo.get_admin_by_id(id)))
+        form = EditAdminProfileForm(data=data)
+    else:
+        data.update(dict(repo.get_alumnus_by_id(id)))
+        form = EditAlumniProfileForm(data=data)
     form.pfp.description = f'<div class="container"><img src="data:image/png;base64,{base64.b64encode(repo.get_pfp(id)).decode()}" class="image"><a href="/pfp" class="middle text">Change</a></div>'
     if form.validate_on_submit():
-        repo.edit_alumni_profile(form.data, id)
+        repo.edit_admin_profile(form.data, id) if session.get("role") == "admin" else repo.edit_alumni_profile(form.data, id)
         flash("Profile updated successfully", "success")
-    return render_template("alumni/profile/edit.jinja", form=form)
+    return render_template(f"alumni/profile/edit.jinja", form=form)

@@ -20,6 +20,14 @@ class repo:
         return db.execute("SELECT * FROM users WHERE id = ?;", id)[0]
 
     @staticmethod
+    def edit_admin_profile(data, id):
+        db.execute(
+            "UPDATE users SET display_name = ? WHERE id = ?;",
+            data["display_name"],
+            id,
+        )
+
+    @staticmethod
     def edit_alumni_profile(data, id):
         db.execute(
             "UPDATE users SET display_name = ? WHERE id = ?;",
@@ -104,7 +112,8 @@ class repo:
 
     @staticmethod
     def get_alumnus_by_id(id):
-        return db.execute("SELECT * FROM alumni WHERE id = ?;", id)[0]
+        alumni = db.execute("SELECT * FROM alumni WHERE id = ?;", id)
+        return alumni[0] if len(alumni) else None
 
     @staticmethod
     def get_marital_status_by_id(id):
@@ -157,6 +166,13 @@ class repo:
             if user.get("display_name")
             else {}
         )
+
+    @staticmethod
+    def get_alumnus_full_profile(id):
+        alumnus = dict(repo.get_user(id))
+        alumnus.update(dict(repo.get_alumnus_by_id(id)))
+        return alumnus
+
 
     @staticmethod
     def get_personal(alumnus):
