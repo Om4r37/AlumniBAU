@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFProtect
-from routes import index
-from routes.auth import login, logout, change_password
+from routes import auth, index
 from routes.alumni import survey, news, posts, profile
 from routes.admin import stats, manage, mod, announce
 
@@ -23,15 +22,13 @@ def create_app():
         manage,
         mod,
         announce,
-        login,
-        logout,
-        change_password,
+        auth,
     ]:
         app.register_blueprint(blueprint.bp)
 
     # Disable caching
     app.jinja_env.cache = None
-    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
 
     @app.after_request
     def after_request(response):

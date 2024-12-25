@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, redirect, request, session, flash
 from forms.auth.login import LoginForm
+from forms.auth.change_password import ChangePasswordForm
 from werkzeug.security import check_password_hash
 from database.repo import repo
 from config import DEBUG
 
-bp = Blueprint("login", __name__)
+bp = Blueprint("auth", __name__)
 
 
 @bp.route("/login", methods=["GET", "POST"])
@@ -44,3 +45,20 @@ def login():
 
     flash("Invalid credentials.", "danger")
     return render_template("auth/login.jinja", form=form)
+
+
+@bp.route("/change_password", methods=["GET", "POST"])
+def change_password():
+    """Change user password"""
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        repo.update_password(session.get("id"), form.password.data)
+        flash("Password Changed Successfully!")
+    return render_template("auth/change_password.jinja", form=form)
+
+
+@bp.route("/logout")
+def logout():
+    """Log user out"""
+    session.clear()
+    return redirect("/")

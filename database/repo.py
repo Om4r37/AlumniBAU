@@ -1,8 +1,7 @@
-import sqlite3
+import sqlite3, csv
 from database.database import db
 from werkzeug.security import generate_password_hash
 from io import StringIO
-import csv
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
@@ -279,12 +278,8 @@ class repo:
 
     @staticmethod
     def get_pfp(id):
-        pfp = dict(db.execute("SELECT profile_picture FROM users WHERE id = ?;", id)[0])
-        return (
-            pfp
-            if pfp.get("profile_picture")
-            else {"profile_picture": open("static/pics/pfp.png", "rb").read()}
-        )
+        pfp = db.execute("SELECT profile_picture FROM users WHERE id = ?;", id)[0]
+        return pfp["profile_picture"] or open("static/pics/pfp.png", "rb").read()
 
     @staticmethod
     def update_pfp(id, pfp):
@@ -309,7 +304,7 @@ class repo:
     @staticmethod
     def update_password(user_id, password):
         db.execute(
-            "UPDATE users SET password_hash = ? WHERE id = ?;",
+            "UPDATE alumni SET password_hash = ? WHERE id = ?;",
             generate_password_hash(password),
             user_id,
         )

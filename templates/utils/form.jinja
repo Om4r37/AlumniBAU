@@ -2,6 +2,9 @@
 {% macro render_form(form) %}
 <form method="post" action="{{form.route}}" {{form.params}}>
     <p class="form-title">{{form.form_title}}</p>
+{% for element in form.elements %}
+    {{ element }}
+{% endfor %}
 {% for field in form %}
     {{ render_field(field) }}
 {% endfor %}
