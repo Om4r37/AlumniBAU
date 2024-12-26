@@ -5,7 +5,6 @@ bp = Blueprint("announce", __name__)
 
 
 @bp.route("/announce")
-@admin_required
 @announcer_required
 def announce():
     return render_template("admin/announce.jinja")

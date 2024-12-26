@@ -6,7 +6,6 @@ bp = Blueprint("stats", __name__)
 
 
 @bp.route("/stats")
-@admin_required
 @data_access_required
 def stats():
     stats = repo.get_stats()
@@ -14,7 +13,6 @@ def stats():
 
 
 @bp.route("/alumni")
-@admin_required
 @data_access_required
 def alumni():
     alumni = repo.get_all_alumni()

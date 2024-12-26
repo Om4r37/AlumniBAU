@@ -10,14 +10,12 @@ bp = Blueprint("manage", __name__)
 
 
 @bp.route("/manage")
-@admin_required
 @manager_required
 def manage():
     return render_template("admin/manage/manage.jinja")
 
 
 @bp.route("/upload", methods=["GET", "POST"])
-@admin_required
 @manager_required
 def upload():
     form = UploadAlumniForm()
@@ -28,7 +26,6 @@ def upload():
 
 
 @bp.route("/hash", methods=["GET", "POST"])
-@admin_required
 @manager_required
 def hash():
     form = hashFileForm()
@@ -39,7 +36,6 @@ def hash():
 
 
 @bp.route("/admins")
-@admin_required
 @manager_required
 def admins():
     admins = repo.get_all_admins(session.get("id"))
@@ -47,7 +43,6 @@ def admins():
 
 
 @bp.route("/add", methods=["GET", "POST"])
-@admin_required
 @manager_required
 def add():
     form = AddAdminForm()
@@ -58,7 +53,6 @@ def add():
 
 
 @bp.route("/edit", methods=["GET", "POST"])
-@admin_required
 @manager_required
 def edit():
     id = request.args.get("id")
@@ -72,7 +66,6 @@ def edit():
 
 
 @bp.route("/delete")
-@admin_required
 @manager_required
 def delete():
     id = request.args.get("id")

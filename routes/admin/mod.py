@@ -5,7 +5,6 @@ bp = Blueprint("mod", __name__)
 
 
 @bp.route("/mod")
-@admin_required
 @mod_permission_required
 def mod():
     return render_template("admin/mod.jinja")
