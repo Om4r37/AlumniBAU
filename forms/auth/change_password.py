@@ -4,7 +4,7 @@ from wtforms.validators import InputRequired, Length, EqualTo
 
 
 class ChangePasswordForm(FlaskForm):
-    form_title = 'Change Password'
+    form_title = "Change Password"
     route = "/change_password"
     password = PasswordField(
         "Password",

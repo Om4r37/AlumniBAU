@@ -1,5 +1,5 @@
 from flask import Blueprint, flash, redirect, render_template, request, session
-from utils import admin_required, manager_required
+from utils import manager_required
 from forms.manage.upload_alumni import UploadAlumniForm
 from forms.manage.hash_file import hashFileForm
 from forms.manage.add_admin import AddAdminForm

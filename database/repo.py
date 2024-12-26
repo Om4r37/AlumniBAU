@@ -137,23 +137,32 @@ class repo:
             "Display Name": user.get("display_name"),
         }
         if alumnus.get("personal_privacy"):
-            if alumnus.get("email"): data["Email"] = alumnus.get("email")
-            if alumnus.get("phone_number"): data["Phone Number"] = alumnus.get("phone_number")
-            if alumnus.get("home_address"): data["Home Address"] = alumnus.get("home_address")
-            if alumnus.get("marital_status_id") != 1: data["Marital Status"] = repo.get_marital_status_by_id(
-                alumnus.get("marital_status_id")
-            )
+            if alumnus.get("email"):
+                data["Email"] = alumnus.get("email")
+            if alumnus.get("phone_number"):
+                data["Phone Number"] = alumnus.get("phone_number")
+            if alumnus.get("home_address"):
+                data["Home Address"] = alumnus.get("home_address")
+            if alumnus.get("marital_status_id") != 1:
+                data["Marital Status"] = repo.get_marital_status_by_id(
+                    alumnus.get("marital_status_id")
+                )
         if alumnus.get("academic_privacy"):
             data["Major"] = repo.get_major_by_id(alumnus.get("major_id"))
             data["Degree"] = repo.get_degree_by_id(alumnus.get("degree_id"))
             data["GPA"] = alumnus.get("GPA") / 100
             data["Graduation Year"] = alumnus.get("graduation_year")
         if alumnus.get("employment_privacy"):
-            if alumnus.get("work_place"): data["Work Place"] = alumnus.get("work_place")
-            if alumnus.get("work_start_date"): data["Work Start Date"] = alumnus.get("work_start_date")
-            if alumnus.get("work_address"): data["Work Address"] = alumnus.get("work_address")
-            if alumnus.get("public_sector"): data["Sector"] = "Public" if alumnus.get("public_sector") else "Private"
-            if alumnus.get("work_phone"): data["Work Phone"] = alumnus.get("work_phone")
+            if alumnus.get("work_place"):
+                data["Work Place"] = alumnus.get("work_place")
+            if alumnus.get("work_start_date"):
+                data["Work Start Date"] = alumnus.get("work_start_date")
+            if alumnus.get("work_address"):
+                data["Work Address"] = alumnus.get("work_address")
+            if alumnus.get("public_sector"):
+                data["Sector"] = "Public" if alumnus.get("public_sector") else "Private"
+            if alumnus.get("work_phone"):
+                data["Work Phone"] = alumnus.get("work_phone")
         return data
 
     @staticmethod

@@ -30,6 +30,7 @@ def index():
 def about():
     return render_template("about.jinja")
 
+
 @bp.route("/jobs")
 def jobs():
     return render_template("jobs.jinja")

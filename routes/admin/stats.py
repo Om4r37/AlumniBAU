@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from utils import admin_required, data_access_required
+from utils import data_access_required
 from database.repo import repo
 
 bp = Blueprint("stats", __name__)

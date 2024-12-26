@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from utils import admin_required, mod_permission_required
+from utils import mod_permission_required
 
 bp = Blueprint("mod", __name__)
 

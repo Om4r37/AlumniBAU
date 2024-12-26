@@ -53,6 +53,10 @@ def edit_profile():
         form = EditAlumniProfileForm(data=data)
     form.pfp.description = f'<div class="container"><img src="data:image/png;base64,{base64.b64encode(repo.get_pfp(id)).decode()}" class="image"><a href="/pfp" class="middle text">Change</a></div>'
     if form.validate_on_submit():
-        repo.edit_admin_profile(form.data, id) if session.get("role") == "admin" else repo.edit_alumni_profile(form.data, id)
+        (
+            repo.edit_admin_profile(form.data, id)
+            if session.get("role") == "admin"
+            else repo.edit_alumni_profile(form.data, id)
+        )
         flash("Profile updated successfully", "success")
     return render_template(f"alumni/profile/edit.jinja", form=form)
