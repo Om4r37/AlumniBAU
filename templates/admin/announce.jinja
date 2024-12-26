@@ -1,2 +1,28 @@
 {% extends "layout/layout.jinja" %}
 {% set highlight_tab = "news" %}
+{% set title = "Announce" %}
+{% block main %}
+<link rel="stylesheet" href="/static/scripts/toastui-editor.min.css">
+<div id="editor"></div>
+<script src="/static/scripts/toastui-editor-all.min.js"></script>
+<script>
+    const editor = new toastui.Editor({
+        el: document.querySelector('#editor'),
+        height: '400px',
+        initialEditType: 'wsywig',
+        previewStyle: 'vertical',
+        initialValue: '',
+        placeholder: 'Write your description here...',
+        hideModeSwitch: true,
+    });
+    window.addEventListener('click', (e) => {
+	var element = document.querySelector('.toastui-editor-tabs .tab-item[aria-label="URL"]');
+	if (element) {
+		element.click();
+	}
+	if(document.querySelector('[aria-label="File"]')) {
+		document.querySelector('[aria-label="File"]').style.display = "none"
+	}
+})
+</script>
+{% endblock %}

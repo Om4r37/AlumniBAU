@@ -7,8 +7,11 @@ bp = Blueprint("posts", __name__)
 @bp.route("/posts")
 @login_required
 def posts():
-    return (
-        redirect("/mod")
-        if session.get("role") == "admin" and "mod" in session.get("perms")
-        else render_template("alumni/posts.jinja")
+    return render_template(
+        "alumni/posts.jinja",
+        add=(
+            '<a href="/mod" class="btn btn-primary">Add Post</a>'
+            if session.get("role") == "admin" and "mod" in session.get("perms")
+            else ""
+        ),
     )
