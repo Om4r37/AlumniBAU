@@ -170,11 +170,11 @@ class repo:
     @staticmethod
     def get_user_full_profile(id):
         user = dict(repo.get_user(id))
+        user.pop("profile_picture")
         if repo.get_alumnus_by_id(id):
             user.update(dict(repo.get_alumnus_by_id(id)))
             user.pop("password_hash")
             user.pop("nno_hash")
-            user.pop("profile_picture")
         return user
 
     @staticmethod
