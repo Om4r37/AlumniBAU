@@ -147,7 +147,7 @@ work_phone,
 postgrad,
 work
 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
-        id = Admin.get_last_user_id() + 1
+        id = User.get_last_user_id() + 1
         reader = csv.reader(StringIO(file.read().decode("utf-8")))
         next(reader)  # Skip header
         params = [
