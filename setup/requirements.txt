@@ -1,1 +1,2 @@
 Flask-WTF == 1.2.2
+Flask-TUI-Editor==1.0.0

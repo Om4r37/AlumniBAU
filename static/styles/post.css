@@ -1,0 +1,19 @@
+#submit {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: #006226f5;
+    margin-top: 1rem;
+    margin-inline: 50%;
+}
+
+form {
+    max-width: 900px;
+    margin-inline: auto;
+}
+
+h2 {
+    text-align: center;
+}

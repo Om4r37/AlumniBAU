@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 77rem;
+    margin-inline: auto;
+}
+
+.container a {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: #006226f5;
+    text-decoration: none;
+}
+
+.container:first-of-type div {
+    width: 8rem;
+}
+
+.container a img {
+    height: 1rem;
+    filter: invert(1);
+    padding-right: 0.2rem;
+}
+
+.post {
+    margin-top: 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    max-width: 77rem;
+    margin-inline: auto;
+    padding: 2rem;
+}
+
+#message {
+    text-align: center;
+}

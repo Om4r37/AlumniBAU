@@ -43,20 +43,6 @@ class repo:
         )
 
     @staticmethod
-    def add_admin(id, username, password, name, manage, announce, alumni_data, mod):
-        return db.execute(
-            "INSERT INTO admins (id, username, password_hash, mod, name, manage, announce, alumni_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
-            id,
-            username,
-            generate_password_hash(password),
-            mod,
-            name,
-            manage,
-            announce,
-            alumni_data,
-        )
-
-    @staticmethod
     def add_admin(data):
         id = repo.get_last_user_id() + 1
         return db.execute(
@@ -185,6 +171,22 @@ class repo:
             user.pop("password_hash")
             user.pop("nno_hash")
         return user
+
+    @staticmethod
+    def get_news():
+        return db.execute(
+            "SELECT * FROM posts WHERE id IN (SELECT id FROM news) ORDER BY publish_date DESC;"
+        )
+
+    @staticmethod
+    def create_announcement(data, id):
+        id = db.execute(
+            "INSERT INTO posts (user_id, content, publish_date) VALUES (?, ?, ?);",
+            id,
+            data["content"],
+            datetime.now(),
+        )
+        db.execute("INSERT INTO news (id) VALUES (?);", id)
 
     @staticmethod
     def get_personal(alumnus):

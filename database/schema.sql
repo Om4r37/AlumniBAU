@@ -29,7 +29,6 @@ CREATE UNIQUE INDEX admins_username_index ON admins (username);
 CREATE TABLE posts (
     id INTEGER PRIMARY KEY,
     user_id INTEGER NOT NULL,
-    title TEXT NOT NULL,
     content TEXT NOT NULL,
     publish_date TEXT NOT NULL,
     comments_count INTEGER DEFAULT 0,
@@ -40,7 +39,6 @@ CREATE TABLE posts (
 
 CREATE TABLE news (
     id INTEGER PRIMARY KEY,
-    expire_date TEXT NOT NULL,
     FOREIGN KEY (id) REFERENCES posts(id)
 );
 
@@ -379,12 +377,12 @@ END;
 
 CREATE TRIGGER news_stats_increment AFTER INSERT ON news BEGIN
     UPDATE stats SET news_count = news_count + 1;
-    UPDATE admins SET news_count = news_count + 1 WHERE id = NEW.user_id;
+    UPDATE admins SET news_count = news_count + 1 WHERE id = (SELECT user_id FROM posts WHERE id = NEW.id);
 END;
 
 CREATE TRIGGER news_stats_decrement BEFORE DELETE ON news BEGIN
     UPDATE stats SET news_count = news_count - 1;
-    UPDATE admins SET news_count = news_count - 1 WHERE id = OLD.user_id;
+    UPDATE admins SET news_count = news_count - 1 WHERE id = (SELECT user_id FROM posts WHERE id = OLD.id);
 END;
 
 CREATE TRIGGER post_stats_increment AFTER INSERT ON posts BEGIN

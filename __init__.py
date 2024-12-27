@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFProtect
+from flask_tui_editor import TUIEditor
 from routes import auth, index, profile
 from routes.alumni import survey, news, posts
 from routes.admin import stats, manage, mod, announce
@@ -9,6 +10,7 @@ def create_app():
     app = Flask(__name__)
     csrf = CSRFProtect()
     csrf.init_app(app)
+    flask_tui_editor = TUIEditor(app)
     app.config.from_pyfile("config.py")
     app.jinja_env.filters["title"] = lambda x: x.replace("_", " ").title()
 

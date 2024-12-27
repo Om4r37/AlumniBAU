@@ -38,7 +38,8 @@ main {
     color: rgb(37, 37, 37);
 }
 
-.links img, .contact img {
+.links img,
+.contact img {
     width: 1rem;
     height: 1rem;
     margin-right: 0.35rem;

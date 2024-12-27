@@ -82,6 +82,7 @@ form {
     max-width: 440px !important;
 }
 
-form > label, form > input {
+form>label,
+form>input {
     margin-left: 3rem;
 }
