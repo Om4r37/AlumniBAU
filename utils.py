@@ -49,6 +49,7 @@ def manager_required(f):
     Decorate routes to require a manager account.
     """
 
+    @admin_required
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "manage" not in session.get("perms"):
@@ -63,6 +64,7 @@ def data_access_required(f):
     Decorate routes to require access to alumni info.
     """
 
+    @admin_required
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "stats" not in session.get("perms"):
@@ -77,6 +79,7 @@ def announcer_required(f):
     Decorate routes to require announcing permission.
     """
 
+    @admin_required
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "announce" not in session.get("perms"):
@@ -91,6 +94,7 @@ def mod_permission_required(f):
     Decorate routes to require mod permissions.
     """
 
+    @admin_required
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "mod" not in session.get("perms"):

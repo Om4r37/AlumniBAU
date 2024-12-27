@@ -2,5 +2,9 @@
 {% set highlight_tab = "news" %}
 {% set title = "Alumni News" %}
 {% block main %}
-{{add}}
+<div class="container">
+    <div></div>
+    <h2>News</h2>
+    <div>{% if add %}<a href="/announce">Announce</a>{% endif %}</div>
+</div>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, session
+from flask import Blueprint, render_template, session
 from utils import login_required
 
 bp = Blueprint("posts", __name__)
@@ -9,9 +9,5 @@ bp = Blueprint("posts", __name__)
 def posts():
     return render_template(
         "alumni/posts.jinja",
-        add=(
-            '<a href="/mod" class="btn btn-primary">Add Post</a>'
-            if session.get("role") == "admin" and "mod" in session.get("perms")
-            else ""
-        ),
+        add=session.get("role") == "admin" and "mod" in session.get("perms"),
     )

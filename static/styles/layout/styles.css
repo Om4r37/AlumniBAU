@@ -91,15 +91,6 @@ main {
     background-color: #18351eb2;
 }
 
-.logout {
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    width: initial;
-    border-radius: 15px;
-    padding: 4px 12px;
-}
-
 .navbar-tabs {
     display: flex;
     list-style: none;
@@ -117,8 +108,11 @@ main {
     border: 1px solid #ffffff26;
 }
 
-.navbar-tab:hover,
-.logout:hover {
+.navbar-tab img {
+    filter: invert(1);
+}
+
+.navbar-tab:hover {
     background-color: #adadad5e;
 }
 
@@ -149,7 +143,6 @@ main {
     }
 
     .navbar-tab {
-        width: 100%;
         justify-content: center;
     }
 
@@ -227,10 +220,6 @@ main {
 
 .red:hover {
     background-color: #c82333;
-}
-
-.white {
-    filter: invert(1);
 }
 
 .tab-icon {

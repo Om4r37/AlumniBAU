@@ -9,32 +9,40 @@
 {% else %}
     {% set tabs = tabs + ["survey"] %}
 {% endif %}
-{% set tabs = tabs + ["profile"] + ["news"] + ["posts"] %}
+{% set tabs = tabs + ["profile", "news", "posts"] %}
 <div class="navbar">
     <div class="navbar-logo"><img src="/static/pics/logo/logo.svg">
         <span> BAU Alumni</span>
     </div>
-    {% if session.get("id") %}
+{% if session.get("id") %}
     <ul class="navbar-tabs">
-        {% for tab in tabs %}
-            <a class="navbar-tab" href="/{{tab}}">
-                <img src="/static/pics/icons/nav/{{tab}}-outline.svg" class="white tab-icon">&nbsp;{{tab|capitalize}}
-            </a>
-        {% endfor %}
+    {% for tab in tabs %}
+        <a class="navbar-tab" href="/{{tab}}">
+            <img src="/static/pics/icons/nav/{{tab}}-outline.svg" class="tab-icon">&nbsp;{{tab|capitalize}}
+        </a>
+    {% endfor %}
     </ul>
-    <a class="logout" href="/logout">Log Out</a>
-    {% endif %}
+    <a class="navbar-tab" href="/logout">
+        <img src="/static/pics/icons/nav/logout.svg" class="tab-icon">
+        &nbsp;Log Out
+    </a>
+    {% else %}
+    <a class="navbar-tab" href="/login">
+        <img src="/static/pics/icons/nav/login.svg" class="tab-icon">
+        &nbsp;Log In
+    </a>
+{% endif %}
 </div>
 {% if session.get("id") %}
 <div class="center">
     <div class="tab-bar">
-        {% for tab in tabs %}
-            <a class="navbar-tab nav-tab" href="/{{tab}}">
-                <span>
-                    <img src="/static/pics/icons/nav/{{tab}}-outline.svg" class="white tab-icon">
-                </span>{{tab|capitalize}}
-            </a>
-        {% endfor %}
+    {% for tab in tabs %}
+        <a class="navbar-tab nav-tab" href="/{{tab}}">
+            <span>
+                <img src="/static/pics/icons/nav/{{tab}}-outline.svg" class="white tab-icon">
+            </span>{{tab|capitalize}}
+        </a>
+    {% endfor %}
     </div>
 </div>
 {% endif %}

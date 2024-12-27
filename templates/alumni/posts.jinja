@@ -2,5 +2,9 @@
 {% set highlight_tab = "posts" %}
 {% set title = "Alumni Posts" %}
 {% block main %}
-{{add}}
+<div class="container">
+    <div></div>
+    <h2>Posts</h2>
+    <div>{% if add %}<a href="/mod">Approve Posts</a>{% endif %}</div>
+</div>
 {% endblock %}
