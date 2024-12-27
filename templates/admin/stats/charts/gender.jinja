@@ -1,0 +1,23 @@
+var genderChart = new Chart(document.getElementById("gender"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Male", "Female"],
+        datasets: [{
+            data: [{{ stats.male_count }}, {{ stats.female_count }}],
+            backgroundColor: ["#36A2EB", "#FF6384"],
+        }]
+    },
+    options: {
+        responsive: true,
+        cutout: "80%",
+        plugins: {
+            title: {
+                display: true,
+                text: 'Gender Distribution',
+                font: {
+                    size: 18
+                }
+            }
+        }
+    }
+});

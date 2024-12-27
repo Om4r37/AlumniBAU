@@ -1,0 +1,23 @@
+var sectorChart = new Chart(document.getElementById("sector"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Public", "Private"],
+        datasets: [{
+            data: [{{ stats.public_sector_count }}, {{ stats.private_sector_count }}],
+            backgroundColor: ["#36A2EB", "#FF6384"],
+        }]
+    },
+    options: {
+        responsive: true,
+        cutout: "80%",
+        plugins: {
+            title: {
+                display: true,
+                text: 'Work Sector',
+                font: {
+                    size: 18
+                }
+            }
+        }
+    }
+});

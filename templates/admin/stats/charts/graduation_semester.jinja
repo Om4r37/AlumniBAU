@@ -1,0 +1,32 @@
+{% set semesters = ["first_semester", "second_semester", "summer"] %}
+var semestersChart = new Chart(document.getElementById("graduation_semester"), {
+    type: 'pie',
+    data: {
+        labels: [{% for semester in semesters %}"{{semester|title}}", {% endfor %}],
+        datasets: [{
+            data: [{% for semester in semesters %}
+                {{stats[semester + "_count"]}},
+            {% endfor %}],
+            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        }]
+    },
+    options: {
+        responsive: true,
+            plugins: {
+            title: {
+                display: true,
+                text: 'Graduation Semester',
+                font: {
+                    size: 18
+                }
+            },
+            legend: {
+                labels: {
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    }
+});

@@ -1,0 +1,32 @@
+{% set postgrad = ["postgrad", "no_postgrad", "postgrad_unspecified"]%}
+var postgradChart = new Chart(document.getElementById("postgrad"), {
+    type: 'pie',
+    data: {
+        labels: [{% for status in postgrad %}"{{status|title}}", {% endfor %}],
+        datasets: [{
+            data: [{% for status in postgrad %}
+                {{stats[status + "_count"]}},
+            {% endfor %}],
+            backgroundColor: ["#36A2EB", "#FF6384", "#aaaaaa"],
+        }]
+    },
+    options: {
+        responsive: true,
+            plugins: {
+            title: {
+                display: true,
+                text: 'Postgraduate Studies',
+                font: {
+                    size: 18
+                }
+            },
+            legend: {
+                labels: {
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    }
+});

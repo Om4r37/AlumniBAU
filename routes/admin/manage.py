@@ -4,7 +4,7 @@ from forms.manage.upload_alumni import UploadAlumniForm
 from forms.manage.hash_file import hashFileForm
 from forms.manage.add_admin import AddAdminForm
 from forms.manage.edit_admin import EditAdminForm
-from database.repo import repo
+from database.repo.admin import Admin
 
 bp = Blueprint("manage", __name__)
 
@@ -20,7 +20,7 @@ def manage():
 def upload():
     form = UploadAlumniForm()
     if form.validate_on_submit():
-        count = repo.add_alumni(form.file.data)
+        count = Admin.add_alumni(form.file.data)
         flash(f"Successfully added {count} alumni")
     return render_template("admin/manage/upload.jinja", form=form)
 
@@ -30,7 +30,7 @@ def upload():
 def hash():
     form = hashFileForm()
     if form.validate_on_submit():
-        repo.hash_file(form.file_name.data)
+        Admin.hash_file(form.file_name.data)
         flash(f"Successfully hashed {form.file_name.data}")
     return render_template("admin/manage/hash.jinja", form=form)
 
@@ -38,7 +38,7 @@ def hash():
 @bp.route("/admins")
 @manager_required
 def admins():
-    admins = repo.get_all_admins(session.get("id"))
+    admins = Admin.get_all_admins(session.get("id"))
     return render_template("admin/manage/admins.jinja", admins=admins)
 
 
@@ -47,7 +47,7 @@ def admins():
 def add():
     form = AddAdminForm()
     if form.validate_on_submit():
-        repo.add_admin(form.data)
+        Admin.add_admin(form.data)
         flash(f"Successfully added {form.username.data}")
     return render_template("admin/manage/add.jinja", form=form)
 
@@ -56,11 +56,11 @@ def add():
 @manager_required
 def edit():
     id = request.args.get("id")
-    admin = repo.get_admin_by_id(id)
+    admin = Admin.get_admin_by_id(id)
     form = EditAdminForm(data=admin, id=id)
     form.form_title = "Edit Admin: " + admin["username"]
     if form.validate_on_submit():
-        repo.edit_admin(form.data, id)
+        Admin.edit_admin(form.data, id)
         flash(f"Successfully edited {admin["username"]}")
     return render_template("admin/manage/admin.jinja", form=form)
 
@@ -69,6 +69,6 @@ def edit():
 @manager_required
 def delete():
     id = request.args.get("id")
-    repo.delete_admin(id)
-    flash("Successfully deleted admin")
+    name = Admin.delete_admin(id)
+    flash(f"Successfully deleted {name}")
     return redirect("/admins")

@@ -10,9 +10,9 @@ def index():
 
 @bp.route("/about")
 def about():
-    return render_template("about.jinja")
+    return render_template("other/about.jinja")
 
 
 @bp.route("/jobs")
 def jobs():
-    return render_template("jobs.jinja")
+    return render_template("other/jobs.jinja")

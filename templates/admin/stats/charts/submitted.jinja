@@ -1,0 +1,23 @@
+var submitChart = new Chart(document.getElementById("submitted"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Yes", "No"],
+        datasets: [{
+            data: [{{ stats.survey_submitted_count }}, {{ stats.alumni_count - stats.survey_submitted_count }}],
+            backgroundColor: ["#008951", "#aaaaaa"],
+        }]
+    },
+    options: {
+        responsive: true,
+        cutout: "80%",
+        plugins: {
+            title: {
+                display: true,
+                text: 'Survey Submissions',
+                font: {
+                    size: 18
+                }
+            }
+        }
+    }
+});

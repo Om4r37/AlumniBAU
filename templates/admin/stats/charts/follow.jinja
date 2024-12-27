@@ -1,0 +1,23 @@
+var followChart = new Chart(document.getElementById("follow"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Yes", "No", "Unspecified"],
+        datasets: [{
+            data: [{{ stats.follow_count }}, {{ stats.not_follow_count }}, {{ stats.alumni_count - stats.follow_count }}],
+            backgroundColor: ["#008951", "#FF6384", "#aaaaaa"],
+        }]
+    },
+    options: {
+        responsive: true,
+        cutout: "80%",
+        plugins: {
+            title: {
+                display: true,
+                text: '"Do you follow universities activities?"',
+                font: {
+                    size: 18
+                }
+            }
+        }
+    }
+});

@@ -1,0 +1,23 @@
+var clubChart = new Chart(document.getElementById("club"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Yes", "No", "Unspecified"],
+        datasets: [{
+            data: [{{ stats.club_count }}, {{ stats.not_club_count }}, {{ stats.alumni_count - stats.club_count }}],
+            backgroundColor: ["#008951", "#FF6384", "#aaaaaa"],
+        }]
+    },
+    options: {
+        responsive: true,
+        cutout: "80%",
+        plugins: {
+            title: {
+                display: true,
+                text: '"Do support creating alumni club?"',
+                font: {
+                    size: 18
+                }
+            }
+        }
+    }
+});

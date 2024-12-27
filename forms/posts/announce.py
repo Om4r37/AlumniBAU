@@ -1,4 +1,4 @@
-from forms.post import PostForm
+from forms.posts.post import PostForm
 
 
 class AnnounceForm(PostForm):

@@ -1,0 +1,23 @@
+var communicateChart = new Chart(document.getElementById("communicate"), {
+    type: 'doughnut',
+    data: {
+        labels: ["Yes", "No", "Unspecified"],
+        datasets: [{
+            data: [{{ stats.communicate_count }}, {{ stats.not_communicate_count }}, {{ stats.alumni_count - stats.communicate_count }}],
+            backgroundColor: ["#008951", "#FF6384", "#aaaaaa"],
+        }]
+    },
+    options: {
+        responsive: true,
+        cutout: "80%",
+        plugins: {
+            title: {
+                display: true,
+                text: '"Do you communicate with the university?"',
+                font: {
+                    size: 18
+                }
+            }
+        }
+    }
+});
