@@ -1,32 +1,8 @@
+{% from "utils/chart.jinja" import chart %}
 {% set majors = ["computer_science", "software_engineering", "information_systems", "computer_graphics", "information_security"] %}
-var majorsChart = new Chart(document.getElementById("majors"), {
-    type: 'pie',
-    data: {
-        labels: [{% for major in majors %}"{{major|title}}", {% endfor %}],
-        datasets: [{
-            data: [{% for major in majors %}
-                {{stats[major + "_count"]}},
-            {% endfor %}],
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4bc0c0", "#ff9f40"],
-        }]
-    },
-    options: {
-        responsive: true,
-            plugins: {
-            title: {
-                display: true,
-                text: 'Majors Distribution',
-                font: {
-                    size: 18
-                }
-            },
-            legend: {
-                labels: {
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    }
-});
+{% set labels = majors|map("title")|list %}
+{% set data = [] %}
+{% for major in majors %}
+    {{ data.append(stats[major + "_count"]) or "" }}
+{% endfor %}
+{{ chart('pie', "majors", labels, data, ["#FF6384", "#36A2EB", "#FFCE56", "#4bc0c0", "#ff9f40"], "Majors Distribution") }}

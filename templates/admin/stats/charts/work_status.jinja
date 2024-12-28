@@ -1,32 +1,9 @@
+{% from "utils/chart.jinja" import chart %}
 {% set work_status = ["work", "never_worked", "unspecified_work"]%}
-var workStatusChart = new Chart(document.getElementById("work_status"), {
-    type: 'pie',
-    data: {
-        labels: [{% for status in work_status %}"{{status|title}}", {% endfor %}],
-        datasets: [{
-            data: [{% for status in work_status %}
-                {{stats[status + "_count"]}},
-            {% endfor %}],
-            backgroundColor: ["#36A2EB", "#FF6384", "#aaaaaa"],
-        }]
-    },
-    options: {
-        responsive: true,
-            plugins: {
-            title: {
-                display: true,
-                text: 'Work Status',
-                font: {
-                    size: 18
-                }
-            },
-            legend: {
-                labels: {
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    }
-});
+{% set labels = work_status|map("title")|list %}
+{% set data = [] %}
+{% for status in work_status %}
+    {{ data.append(stats[status + "_count"]) or "" }}
+{% endfor %}
+{% set colors = ["#36A2EB", "#FF6384", "#aaaaaa"] %}
+{{ chart('pie', "work_status", labels, data, colors, "Work Status") }}

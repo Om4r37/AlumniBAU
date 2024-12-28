@@ -1,28 +1,7 @@
+{% from "utils/chart.jinja" import chart %}
 {% set years = ["2019", "2020", "2021", "2022", "2023"] %}
-var yearChart = new Chart(document.getElementById("graduation_year"), {
-    type: 'bar',
-    data: {
-        labels: {{years}},
-        datasets: [{
-            data: [{% for year in years %}
-                {{stats["_" + year + "_count"]}},
-            {% endfor %}],
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4bc0c0", "#ff9f40"],
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Graduation Year',
-                font: {
-                    size: 18
-                }
-            },
-            legend: {
-                display: false
-            }
-        }
-    }
-});
+{% set data = [] %}
+{% for year in years %}
+    {{ data.append(stats["_" + year + "_count"]) or "" }}
+{% endfor %}
+{{ chart('bar', "graduation_year", years, data, ["#FF6384", "#36A2EB", "#FFCE56", "#4bc0c0", "#ff9f40"], "Graduation Year") }}

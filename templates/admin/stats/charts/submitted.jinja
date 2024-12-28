@@ -1,23 +1,5 @@
-var submitChart = new Chart(document.getElementById("submitted"), {
-    type: 'doughnut',
-    data: {
-        labels: ["Yes", "No"],
-        datasets: [{
-            data: [{{ stats.survey_submitted_count }}, {{ stats.alumni_count - stats.survey_submitted_count }}],
-            backgroundColor: ["#008951", "#aaaaaa"],
-        }]
-    },
-    options: {
-        responsive: true,
-        cutout: "80%",
-        plugins: {
-            title: {
-                display: true,
-                text: 'Survey Submissions',
-                font: {
-                    size: 18
-                }
-            }
-        }
-    }
-});
+{% from "utils/chart.jinja" import chart %}
+{% set labels = ["Yes", "No"] %}
+{% set data = [stats.survey_submitted_count, stats.alumni_count - stats.survey_submitted_count] %}
+{% set colors = ["#008951", "#aaaaaa"] %}
+{{ chart('doughnut', "submitted", labels, data, colors, 'Survey Submissions') }}

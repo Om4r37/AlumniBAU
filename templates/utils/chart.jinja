@@ -1,0 +1,28 @@
+{% macro chart(type, id, labels, data, colors, title) %}
+var {{id}}Chart = new Chart(document.getElementById("{{id}}"), {
+    type: '{{type}}',
+    data: {
+        labels: {{labels}},
+        datasets: [{
+            data: {{data}},
+            backgroundColor: {{colors}},
+        }]
+    },
+    options: {
+        responsive: true,
+        {% if type == "doughnut" %}cutout: "80%",{% endif %}
+        plugins: {
+            title: {
+                display: true,
+                text: '{{title}}',
+                font: {
+                    size: 18
+                }
+            },
+            legend: {
+                {% if type == "bar" %}display: false{% endif %}
+            }
+        }
+    }
+});
+{% endmacro %}

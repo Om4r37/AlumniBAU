@@ -1,23 +1,9 @@
-var sectorChart = new Chart(document.getElementById("sector"), {
-    type: 'doughnut',
-    data: {
-        labels: ["Public", "Private"],
-        datasets: [{
-            data: [{{ stats.public_sector_count }}, {{ stats.private_sector_count }}],
-            backgroundColor: ["#36A2EB", "#FF6384"],
-        }]
-    },
-    options: {
-        responsive: true,
-        cutout: "80%",
-        plugins: {
-            title: {
-                display: true,
-                text: 'Work Sector',
-                font: {
-                    size: 18
-                }
-            }
-        }
-    }
-});
+{% from "utils/chart.jinja" import chart %}
+{% set sectors = ["public", "private"] %}
+{% set labels = sectors|map("title")|list %}
+{% set data = [] %}
+{% for sector in sectors %}
+    {{ data.append(stats[sector + "_sector_count"]) or "" }}
+{% endfor %}
+{% set colors = ["#36A2EB", "#FF6384"] %}
+{{ chart('doughnut', "sector", labels, data, colors, "Work Sector") }}

@@ -1,33 +1,9 @@
-{% set marital_status = ["married", "single", "divorced", "widowed"]%}
-var maritalStatusChart = new Chart(document.getElementById("marital_status"), {
-    type: 'pie',
-    data: {
-        labels: [{% for status in marital_status %}"{{status|title}}", {% endfor %} "Unspecified"],
-        datasets: [{
-            data: [{% for status in marital_status %}
-                {{stats[status + "_count"]}},
-            {% endfor %}
-            {{stats.unspecified_marital_status_count}}],
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4bc0c0", "#aaaaaa"],
-        }]
-    },
-    options: {
-        responsive: true,
-            plugins: {
-            title: {
-                display: true,
-                text: 'Marital Status',
-                font: {
-                    size: 18
-                }
-            },
-            legend: {
-                labels: {
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    }
-});
+{% from "utils/chart.jinja" import chart %}
+{% set marital_status = ["married", "single", "divorced", "widowed"] %}
+{% set labels = marital_status|map("title")|list %}
+{% set data = [] %}
+{% for status in marital_status %}
+    {{ data.append(stats[status + "_count"]) or "" }}
+{% endfor %}
+{% set colors = ["#FF6384", "#36A2EB", "#FFCE56", "#4bc0c0", "#aaaaaa"] %}
+{{ chart('pie', "marital_status", labels + ["Unspecified"], data + [stats.unspecified_marital_status_count], colors, "Marital Status") }}

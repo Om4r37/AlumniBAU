@@ -1,32 +1,8 @@
-{% set degrees = ["bachelor", "master_thesis", "master_comprehensive"]%}
-var degreesChart = new Chart(document.getElementById("degrees"), {
-    type: 'pie',
-    data: {
-        labels: [{% for degree in degrees %}"{{degree|title}}", {% endfor %}],
-        datasets: [{
-            data: [{% for degree in degrees %}
-                {{stats[degree + "_count"]}},
-            {% endfor %}],
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        }]
-    },
-    options: {
-        responsive: true,
-            plugins: {
-            title: {
-                display: true,
-                text: 'Degrees Distribution',
-                font: {
-                    size: 18
-                }
-            },
-            legend: {
-                labels: {
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    }
-});
+{% from "utils/chart.jinja" import chart %}
+{% set degrees = ["bachelor", "master_thesis", "master_comprehensive"] %}
+{% set labels = degrees|map("title")|list %}
+{% set data = [] %}
+{% for degree in degrees %}
+    {{ data.append(stats[degree + "_count"]) or "" }}
+{% endfor %}
+{{ chart('pie', "degrees", labels, data, ["#FF6384", "#36A2EB", "#FFCE56"], "Degrees Distribution") }}
