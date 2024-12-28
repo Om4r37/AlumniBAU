@@ -1,5 +1,6 @@
 from database.database import db
 from werkzeug.security import generate_password_hash
+import random, string
 
 
 class Alumnus:
@@ -52,6 +53,24 @@ class Alumnus:
             generate_password_hash(password),
             user_id,
         )
+
+    @staticmethod
+    def check_email(email):
+        return db.execute("SELECT * FROM alumni WHERE email = ?;", email)
+
+    @staticmethod
+    def recover_account(email):
+        new_password = "".join(
+            random.choices(string.ascii_letters + string.digits, k=8)
+        )
+        db.execute(
+            "UPDATE alumni SET password_hash = ? WHERE email = ?;",
+            generate_password_hash(new_password),
+            email,
+        )
+        return new_password
+        
+
 
     @staticmethod
     def edit_alumni_profile(data, id):

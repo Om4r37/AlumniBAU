@@ -1,0 +1,9 @@
+{% extends "layout/layout.jinja" %}
+{% from "utils/form.jinja" import render_form %}
+{% from "utils/back.jinja" import back %}
+{% set title = "Recover Account" %}
+{% block main %}
+<link href="/static/styles/other/form.css" rel="stylesheet">
+{{ render_form(form) }}
+{{ back("/login") }}
+{% endblock %}

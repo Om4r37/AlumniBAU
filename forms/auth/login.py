@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, RadioField
+from wtforms import HiddenField, StringField, PasswordField, SubmitField, BooleanField, RadioField
 from wtforms.widgets import PasswordInput
 from wtforms.validators import InputRequired, Length
 from config import DEBUG
@@ -41,4 +41,5 @@ class LoginForm(FlaskForm):
             "id": "eye",
         },
     )
+    recover_account = HiddenField("", description="<a href='/recover_account'>Forgot Password?</a>")
     submit = SubmitField("Login", render_kw={"class": "submit"})

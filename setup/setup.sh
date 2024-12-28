@@ -8,7 +8,9 @@ DEBUG = False
 SECRET_KEY = 'development_key'
 USERNAME = 'admin'
 PASSWORD = 'default'
-PORT = 1337" > config.py
+PORT = 1337
+MAIL_USERNAME = ''
+MAIL_PASSWORD = ''" > config.py
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r setup/requirements.txt
