@@ -9,8 +9,8 @@ bp = Blueprint("posts", __name__)
 @login_required
 def posts():
     return render_template(
-        "alumni/posts.jinja",
-        add=session.get("role") == "admin" and "mod" in session.get("perms"),
+        "alumni/posts/posts.jinja",
+        posts=Repo.get_news(),
     )
 
 

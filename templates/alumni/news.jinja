@@ -8,20 +8,11 @@
 <div class="container">
     <div></div>
     <h2>News</h2>
-    <div>
-    {% if add %}
-        <a href="/announce">
-            <img src="/static/pics/icons/plus.svg">
-            Announce
-        </a>
-    {% endif %}
-    </div>
+    <div></div>
 </div>
 {% if posts %}
 {% for post in posts %}
-<a href="/post?id={{post.id}}">
-    <div id="_{{post.id}}" class="post"></div>
-</a>
+<div id="_{{post.id}}" class="post posts" onclick="window.location.href='/post?id={{post.id}}'"></div>
 {% endfor %}
 <script>
 {% for post in posts %}

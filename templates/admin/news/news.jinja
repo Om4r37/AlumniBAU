@@ -9,17 +9,15 @@
     <div></div>
     <h2>News</h2>
     <div>
-    {% if add %}
         <a href="/announce">
             <img src="/static/pics/icons/plus.svg">
             Announce
         </a>
-    {% endif %}
     </div>
 </div>
 {% if posts %}
 {% for post in posts %}
-<div id="_{{post.id}}" class="post"></div>
+<div id="_{{post.id}}" class="post posts" onclick="window.location.href='/post?id={{post.id}}'"></div>
 {% endfor %}
 <script>
 {% for post in posts %}

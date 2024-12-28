@@ -32,14 +32,15 @@
     background-color: white;
     border-radius: 1rem;
     max-width: 77rem;
-    max-height: 20rem;
     overflow: scroll;
     margin-inline: auto;
     padding: 2rem;
+    
 }
 
-#post {
-    max-height: fit-content;
+.posts {
+    cursor: pointer;
+    max-height: 25rem;
 }
 
 #message {

@@ -8,7 +8,6 @@ bp = Blueprint("news", __name__)
 def news():
     posts = Repo.get_news()
     return render_template(
-        "alumni/news.jinja",
-        add=session.get("role") == "admin" and "announce" in session.get("perms"),
+        f"{'admin/news' if session.get("role") == "admin" and "announce" in session.get("perms") else 'alumni'}/news.jinja",
         posts=posts,
     )

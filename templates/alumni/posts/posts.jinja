@@ -2,9 +2,29 @@
 {% set highlight_tab = "posts" %}
 {% set title = "Alumni Posts" %}
 {% block main %}
+{{ flask_tui_editor.css }}
+<link rel="stylesheet" href="/static/styles/alumni/posts.css">
+<script src="/static/scripts/toastui-editor-viewer.min.js"></script>
 <div class="container">
     <div></div>
     <h2>Posts</h2>
-    <div>{% if add %}<a href="/mod">Approve Posts</a>{% endif %}</div>
+    <div></div>
 </div>
+{% if posts %}
+{% for post in posts %}
+<div id="_{{post.id}}" class="post posts" onclick="window.location.href='/post?id={{post.id}}'"></div>
+{% endfor %}
+<script>
+{% for post in posts %}
+const _{{post.id}} = new toastui.Editor({
+    el: document.querySelector('#_{{post.id}}'),
+    initialValue: `# {{post.title}}
+{{post.content}}`,
+    viewer: true,
+});
+{% endfor %}
+</script>
+{% else %}
+<p id="message">There are no posts yet.</p>
+{% endif %}
 {% endblock %}
