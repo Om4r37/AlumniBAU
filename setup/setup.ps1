@@ -3,7 +3,6 @@ cd AlumniBAU\
 New-Item -Path "config.py" -ItemType "file" -Force
 Set-Content -Path "config.py" -Value "# change before deployment
 DATABASE = 'database.db'
-SCHEMA = 'schema.sql'
 DEBUG = False
 SECRET_KEY = 'development_key'
 USERNAME = 'admin'

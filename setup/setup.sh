@@ -3,7 +3,6 @@ cd AlumniBAU/
 touch config.py
 echo "# change before deployment
 DATABASE = 'database.db'
-SCHEMA = 'schema.sql'
 DEBUG = False
 SECRET_KEY = 'development_key'
 USERNAME = 'admin'

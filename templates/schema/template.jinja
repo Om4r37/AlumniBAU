@@ -1,0 +1,24 @@
+{% set tables = ["users", "admins", "posts", "news", "alumni", "alumni_posts", "social_links", "majors", "degrees", "marital_status", "comments", "likes", "dislikes", "follows", "stats"] %}
+{% for table in tables %}
+{% include 'templates/schema/tables/' + table + '.sql' %}
+{% endfor %}
+
+{% include 'templates/schema/triggers/admins/add.sql' %}
+
+{% set alumni_triggers = ["add", "after_update", "before_update"] %}
+{% for trigger in alumni_triggers %}
+{% include 'templates/schema/triggers/alumni/' + trigger + '.sql' %}
+{% endfor %}
+
+{% set stats = ["post", "news", "comment", "like", "dislike", "follow"] %}
+{% for stat in stats %}
+{% include 'templates/schema/triggers/stats/' + stat + '/increment.sql' %}
+{% include 'templates/schema/triggers/stats/' + stat + '/decrement.sql' %}
+{% endfor %}
+
+{% set indexes = ["alumni", "admins"] %}
+{% for index in indexes %}
+{% include 'templates/schema/indexes/' + index + '.sql' %}
+{% endfor %}
+
+{% include 'templates/schema/inserts.sql'%}

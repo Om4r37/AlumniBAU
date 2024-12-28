@@ -1,6 +1,6 @@
-import sqlite3, os, sys
+import sqlite3, os, sys, jinja2
 from werkzeug.security import generate_password_hash
-from config import DATABASE, SCHEMA, DEBUG, USERNAME, PASSWORD
+from config import DATABASE, DEBUG, USERNAME, PASSWORD
 
 
 class Database:
@@ -13,14 +13,13 @@ class Database:
             cls._instance = super(Database, cls).__new__(cls)
         return cls._instance
 
-    def __init__(self, db_name=DATABASE, schema_file=SCHEMA):
+    def __init__(self, db_name=DATABASE):
         if hasattr(self, "_initialized") and self._initialized:
             return
         self._initialized = True
         self.db_name = db_name
-        self.schema_file = schema_file
-        self.base_path = os.path.dirname(os.path.abspath(__file__))
-        sys.path.append(os.path.dirname(self.base_path))
+        self.base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sys.path.append(self.base_path)
         self._db = None
         self._initialize_database()
 
@@ -49,11 +48,9 @@ class Database:
         """Creates a new SQLite database and initializes it with the schema."""
         open(self.db_name, "w").close()
         conn = self._get_connection()
-        schema_path = os.path.join(self.base_path, self.schema_file)
         try:
-            schema = ""
-            with open(schema_path, "r") as file:
-                schema = file.read()
+            env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.base_path))
+            schema = env.get_template("/templates/schema/template.jinja").render()
             conn.executescript(schema)
             conn.commit()
             self.execute(
