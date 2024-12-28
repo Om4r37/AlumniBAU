@@ -19,16 +19,13 @@
 </div>
 {% if posts %}
 {% for post in posts %}
-<a href="/post?id={{post.id}}">
-    <div id="_{{post.id}}" class="post"></div>
-</a>
+<div id="_{{post.id}}" class="post"></div>
 {% endfor %}
 <script>
 {% for post in posts %}
 const _{{post.id}} = new toastui.Editor({
     el: document.querySelector('#_{{post.id}}'),
-    initialValue: `# {{post.title}}
-{{post.content}}`,
+    initialValue: `{{post.content}}`,
     viewer: true,
 });
 {% endfor %}

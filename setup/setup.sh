@@ -2,7 +2,7 @@ git clone https://github.com/Om4r37/AlumniBAU.git
 cd AlumniBAU/
 touch config.py
 echo "# change before deployment
-DATABASE = 'database.db'
+DATABASE = 'database/database.db'
 DEBUG = False
 SECRET_KEY = 'development_key'
 USERNAME = 'admin'

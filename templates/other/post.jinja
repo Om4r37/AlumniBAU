@@ -1,0 +1,17 @@
+{% extends "layout/layout.jinja" %}
+{% set highlight_tab = "news" %}
+{% set title = "Alumni News" %}
+{% block main %}
+{{ flask_tui_editor.css }}
+<link rel="stylesheet" href="/static/styles/alumni/posts.css">
+<script src="/static/scripts/toastui-editor-viewer.min.js"></script>
+<div id="post" class="post"></div>
+<script>
+const post = new toastui.Editor({
+    el: document.querySelector('#post'),
+    initialValue: `# {{post.title}}
+{{post.content}}`,
+    viewer: true,
+});
+</script>
+{% endblock %}

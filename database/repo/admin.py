@@ -81,8 +81,9 @@ class Admin:
     @staticmethod
     def create_announcement(data, id):
         id = db.execute(
-            "INSERT INTO posts (user_id, content, publish_date) VALUES (?, ?, ?);",
+            "INSERT INTO posts (user_id, title, content, publish_date) VALUES (?, ?, ?, ?);",
             id,
+            data["title"],
             data["content"],
             datetime.now(),
         )

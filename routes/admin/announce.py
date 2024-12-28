@@ -14,4 +14,4 @@ def announce():
         Admin.create_announcement(form.data, session.get("id"))
         flash("Announcement created successfully!", "success")
         return redirect("/news")
-    return render_template("admin/announce.jinja", form=form)
+    return render_template("admin/news/announce.jinja", form=form)

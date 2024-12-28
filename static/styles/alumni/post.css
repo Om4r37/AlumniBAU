@@ -17,3 +17,12 @@ form {
 h2 {
     text-align: center;
 }
+
+label {
+    margin-left: 25%;
+}
+
+input[type="text"] {
+    width: 20rem;
+    margin-bottom: 1rem;
+}
