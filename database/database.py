@@ -18,8 +18,8 @@ class Database:
             return
         self._initialized = True
         self.db_name = db_name
-        self.base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        sys.path.append(self.base_path)
+        self.base_path = os.path.dirname(os.path.abspath(__file__))
+        sys.path.append(os.path.dirname(self.base_path))
         self._db = None
         self._initialize_database()
 
@@ -50,7 +50,7 @@ class Database:
         conn = self._get_connection()
         try:
             env = jinja2.Environment(loader=jinja2.FileSystemLoader(self.base_path))
-            schema = env.get_template("/templates/schema/template.jinja").render()
+            schema = env.get_template("schema/template.jinja").render()
             conn.executescript(schema)
             conn.commit()
             self.execute(
