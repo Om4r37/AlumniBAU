@@ -14,7 +14,7 @@ def create_app():
     TUIEditor(app)
     app.config.from_pyfile("config.py")
     app.jinja_env.filters["title"] = lambda x: x.replace("_", " ").title()
-    app.jinja_env.filters["encode"] = lambda x: base64.b64encode(x).decode()
+    app.jinja_env.filters["encode"] = lambda x: base64.b64encode(x).decode() if x else None
 
     for blueprint in [
         index,

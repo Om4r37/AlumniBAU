@@ -10,4 +10,13 @@ class Repo:
 
     @staticmethod
     def get_post(id):
-        return db.execute("SELECT * FROM posts JOIN news WHERE posts.id = ?;", id)[0]
+        post = dict(db.execute(
+            "SELECT * FROM posts WHERE id = ?;",
+            id,
+        )[0])
+        post["thumbnail"] = db.execute(
+            "SELECT thumbnail FROM news WHERE id = ?;",
+            id,
+        )[0]["thumbnail"]
+        return post
+
