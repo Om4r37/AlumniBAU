@@ -26,3 +26,13 @@ input[type="text"] {
     width: 20rem;
     margin-bottom: 1rem;
 }
+
+input[type="file"] {
+    margin-top: 0.5rem;
+    background-color: white;
+    margin-left: 36%;
+}
+
+label[for="file"] {
+    margin-left: 45%;
+}

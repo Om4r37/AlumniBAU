@@ -35,6 +35,9 @@
     overflow: scroll;
     margin-inline: auto;
     padding: 2rem;
+    display: block;
+    text-decoration: none;
+    color: black;
     
 }
 

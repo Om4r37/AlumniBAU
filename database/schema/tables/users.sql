@@ -1,6 +1,6 @@
 CREATE TABLE users (
     id INTEGER PRIMARY KEY,
-    display_name TEXT,
+    display_name TEXT DEFAULT 'Anonymous',
     phone_number TEXT,
     email TEXT,
     profile_picture BLOB,

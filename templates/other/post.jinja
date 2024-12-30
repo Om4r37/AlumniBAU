@@ -10,6 +10,7 @@
 const post = new toastui.Editor({
     el: document.querySelector('#post'),
     initialValue: `# {{post.title}}
+{% if post.thumbnail %}![](data:image/png;base64,{{post.thumbnail|encode}}){% endif %}
 {{post.content}}`,
     viewer: true,
 });

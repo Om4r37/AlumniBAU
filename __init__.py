@@ -1,3 +1,4 @@
+import base64
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFProtect
 from flask_tui_editor import TUIEditor
@@ -13,6 +14,7 @@ def create_app():
     TUIEditor(app)
     app.config.from_pyfile("config.py")
     app.jinja_env.filters["title"] = lambda x: x.replace("_", " ").title()
+    app.jinja_env.filters["encode"] = lambda x: base64.b64encode(x).decode()
 
     for blueprint in [
         index,

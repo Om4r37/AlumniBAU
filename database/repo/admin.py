@@ -1,4 +1,4 @@
-import csv
+import csv, sqlite3
 from database.database import db
 from werkzeug.security import generate_password_hash
 from datetime import datetime
@@ -87,7 +87,11 @@ class Admin:
             data["content"],
             datetime.now(),
         )
-        db.execute("INSERT INTO news (id) VALUES (?);", id)
+        db.execute(
+            "INSERT INTO news (id, thumbnail) VALUES (?, ?);",
+            id,
+            sqlite3.Binary(data["file"].read()),
+        )
 
     @staticmethod
     def update_password(user_id, password):

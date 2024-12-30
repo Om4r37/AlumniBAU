@@ -8,7 +8,7 @@
 <div class="container">
     <div></div>
     <h2>Posts</h2>
-    <div></div>
+    <div>{% block approve %}{% endblock %}</div>
 </div>
 {% if posts %}
 {% for post in posts %}
