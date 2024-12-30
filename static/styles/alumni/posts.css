@@ -46,6 +46,11 @@
     max-height: 25rem;
 }
 
-#message {
+#empty-message {
     text-align: center;
+}
+
+.thumbnail {
+    margin-left: 50%;
+    transform: translateX(-50%);
 }

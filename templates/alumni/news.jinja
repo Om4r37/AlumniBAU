@@ -12,10 +12,10 @@
 {% for post in posts %}
 <a id="_{{post.id}}" class="post" href="/post?id={{post.id}}">
     <h2>{{post.title}}</h2>
-    <img src="data:image/png;base64,{{post.thumbnail|encode}}">
+    <img class="thumbnail" src="data:image/png;base64,{{post.thumbnail|encode}}">
 </a>
 {% endfor %}
 {% else %}
-<p id="message">There are no announcements yet.</p>
+<p id="empty-message">There are no announcements yet.</p>
 {% endif %}
 {% endblock %}
