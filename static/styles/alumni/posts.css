@@ -53,4 +53,6 @@
 .thumbnail {
     margin-left: 50%;
     transform: translateX(-50%);
+    max-height: 22rem;
+    max-width: 100%;
 }

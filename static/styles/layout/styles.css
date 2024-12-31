@@ -10,6 +10,17 @@ main {
     padding-top: 4rem;
 }
 
+#blur {
+    position: fixed;
+    background-color: transparent;
+    backdrop-filter: blur(1rem);
+    mask: linear-gradient(black, black, rgba(0, 0, 0, 0.4));
+    width: 100vw;
+    height: 4.5rem;
+    top: 0;
+    z-index: 9;
+}
+
 .navbar *,
 .tab-bar * {
     text-decoration: none;
