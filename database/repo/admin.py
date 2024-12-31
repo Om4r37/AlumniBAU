@@ -94,6 +94,23 @@ class Admin:
         )
 
     @staticmethod
+    def edit_announcement(data, id):
+        db.execute(
+            "UPDATE posts SET title = ?, content = ? WHERE id = ?;",
+            data["title"],
+            data["content"],
+            id,
+        )
+    
+    @staticmethod
+    def edit_thumbnail(data, id):
+        db.execute(
+            "UPDATE news SET thumbnail = ? WHERE id = ?;",
+            sqlite3.Binary(data["file"].read()),
+            id,
+        )
+
+    @staticmethod
     def update_password(user_id, password):
         db.execute(
             "UPDATE admins SET password_hash = ? WHERE id = ?;",

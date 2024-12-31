@@ -5,7 +5,7 @@
 {% block main %}
 <link href="/static/styles/alumni/post.css" rel="stylesheet">
 <script src="/static/scripts/post.js"></script>
-<h2>Add an Announcement</h2>
+<h2>{% block header %}Add an Announcement{% endblock %}</h2>
 {{ flask_tui_editor.css }}
 {{ render_form(form) }}
 {{ flask_tui_editor.js }}

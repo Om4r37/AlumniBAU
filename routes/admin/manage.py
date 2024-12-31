@@ -52,7 +52,7 @@ def add():
     return render_template("admin/manage/add.jinja", form=form)
 
 
-@bp.route("/edit", methods=["GET", "POST"])
+@bp.route("/edit_admin", methods=["GET", "POST"])
 @manager_required
 def edit():
     id = request.args.get("id")

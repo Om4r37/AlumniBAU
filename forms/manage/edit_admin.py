@@ -6,7 +6,7 @@ class EditAdminForm(FlaskForm):
     def __init__(self, id, *args, **kwargs):
         super(EditAdminForm, self).__init__(*args, **kwargs)
         self.id = id
-        self.route = f"/edit?id={id}"
+        self.route = f"/edit_admin?id={id}"
         self.delete = f"/delete?id={id}"
 
     form_title = "Edit Admin"

@@ -28,7 +28,7 @@
 }
 
 .post {
-    margin-top: 2rem;
+    margin-block: 2rem;
     background-color: white;
     border-radius: 1rem;
     max-width: 77rem;
@@ -55,4 +55,20 @@
 
 .thumbnail {
     max-width: 100%;
+}
+
+.edit {
+    color: white;
+    background-color: #006226f5;
+    border: none;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.edit > img {
+    height: 1rem;
+    filter: invert(1);
+    padding-right: 0.2rem;
 }

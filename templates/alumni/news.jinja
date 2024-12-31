@@ -12,7 +12,7 @@
 </div>
 {% if posts %}
 {% for post in posts %}
-<div class="post posts" onclick="window.location.href='/post?id={{post.id}}'">
+<div class="post posts" onclick="window.location.href='/{% block route %}post{% endblock %}?id={{post.id}}'">
     <h2 class="post-title">{{post.title}}</h2>
 {% if post.thumbnail %}<img class="thumbnail" src="data:image/png;base64,{{post.thumbnail|encode}}">{% endif %}
     <div id="_{{post.id}}"></div>

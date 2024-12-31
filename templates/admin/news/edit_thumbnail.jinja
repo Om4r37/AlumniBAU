@@ -1,11 +1,11 @@
 {% extends "layout/layout.jinja" %}
 {% from "utils/form.jinja" import render_form %}
 {% from "utils/back.jinja" import back %}
-{% set highlight_tab = "profile" %}
-{% set title = "Profile Picture" %}
+{% set highlight_tab = "news" %}
+{% set title = "Thumbnail" %}
 {% block main %}
-<link href="/static/styles/alumni/pfp.css" rel="stylesheet">
+<link href="/static/styles/admin/thumbnail.css" rel="stylesheet">
 <script src="/static/scripts/loadFile.js"></script>
 {{ render_form(form) }}
-{{ back("/edit_profile") }}
+{{ back("/edit_announcement?id=" + id) }}
 {% endblock %}

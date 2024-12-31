@@ -10,6 +10,7 @@
 {% if post.thumbnail %}<img class="thumbnail" src="data:image/png;base64,{{post.thumbnail|encode}}">{% endif %}
     <div id="post"></div>
 </div>
+{% block edit %}{% endblock %}
 <script>
 const post = new toastui.Editor({
     el: document.querySelector('#post'),

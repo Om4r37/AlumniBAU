@@ -14,11 +14,11 @@ def posts():
     )
 
 
-@bp.route("/post")
+@bp.route("/announcement")
 def post():
     id = request.args.get("id")
     if id:
         return render_template(
-            "other/post.jinja",
-            post=Repo.get_post(id),
+            f'{"admin/posts" if session.get("role") == "admin" and "announce" in session.get("perms") else "other"}/post.jinja',
+            post=Repo.get_news_post(id),
         )
