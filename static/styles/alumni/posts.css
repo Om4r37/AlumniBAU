@@ -41,9 +41,12 @@
     
 }
 
+.post-title {
+    text-align: center;
+}
+
 .posts {
     cursor: pointer;
-    max-height: 25rem;
 }
 
 #empty-message {
@@ -51,8 +54,5 @@
 }
 
 .thumbnail {
-    margin-left: 50%;
-    transform: translateX(-50%);
-    max-height: 22rem;
     max-width: 100%;
 }

@@ -2,7 +2,9 @@
 {% set highlight_tab = "news" %}
 {% set title = "Alumni News" %}
 {% block main %}
+{{ flask_tui_editor.css }}
 <link rel="stylesheet" href="/static/styles/alumni/posts.css">
+<script src="/static/scripts/toastui-editor-viewer.min.js"></script>
 <div class="container">
     <div></div>
     <h2>News</h2>
@@ -10,11 +12,21 @@
 </div>
 {% if posts %}
 {% for post in posts %}
-<a id="_{{post.id}}" class="post" href="/post?id={{post.id}}">
-    <h2>{{post.title}}</h2>
-    <img class="thumbnail" src="data:image/png;base64,{{post.thumbnail|encode}}">
-</a>
+<div class="post posts" onclick="window.location.href='/post?id={{post.id}}'">
+    <h2 class="post-title">{{post.title}}</h2>
+{% if post.thumbnail %}<img class="thumbnail" src="data:image/png;base64,{{post.thumbnail|encode}}">{% endif %}
+    <div id="_{{post.id}}"></div>
+</div>
 {% endfor %}
+<script>
+{% for post in posts %}
+const _{{post.id}} = new toastui.Editor({
+    el: document.querySelector('#_{{post.id}}'),
+    initialValue: `{{post.content}}`,
+    viewer: true,
+});
+{% endfor %}
+</script>
 {% else %}
 <p id="empty-message">There are no announcements yet.</p>
 {% endif %}
