@@ -28,11 +28,10 @@
 }
 
 .post {
-    margin-block: 2rem;
+    margin-bottom: 2rem;
     background-color: white;
     border-radius: 1rem;
     max-width: 77rem;
-    overflow: scroll;
     margin-inline: auto;
     padding: 2rem;
     display: block;
@@ -78,4 +77,24 @@
     height: 1rem;
     filter: invert(1);
     padding-right: 0.2rem;
+}
+
+.post-header {
+    max-width: 77rem;
+    margin-inline: auto;
+    padding: 1rem;
+}
+
+.post-header img {
+    height: 2rem;
+    width: 2rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: -0.5rem;
+}
+
+.post-header a {
+    color: black;
+    text-decoration: none;
 }

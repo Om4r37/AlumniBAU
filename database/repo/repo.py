@@ -5,7 +5,14 @@ class Repo:
     @staticmethod
     def get_news():
         return db.execute(
-            "SELECT * FROM posts INNER JOIN news ON posts.id = news.id WHERE archived = FALSE ORDER BY publish_date DESC;"
+            """
+            SELECT posts.*, news.*, users.display_name, users.profile_picture 
+            FROM posts 
+            INNER JOIN news ON posts.id = news.id 
+            INNER JOIN users ON posts.user_id = users.id 
+            WHERE archived = FALSE 
+            ORDER BY publish_date DESC;
+            """
         )
 
     @staticmethod
@@ -14,10 +21,23 @@ class Repo:
 
     @staticmethod
     def get_news_post(id):
-        post = dict(db.execute("SELECT * FROM posts WHERE id = ?;", id)[0])
+        post = dict(
+            db.execute(
+                """
+            SELECT posts.*, users.display_name, users.profile_picture 
+            FROM posts 
+            INNER JOIN users ON posts.user_id = users.id 
+            WHERE posts.id = ?;
+            """,
+                id,
+            )[0]
+        )
         post["thumbnail"] = db.execute("SELECT thumbnail FROM news WHERE id = ?;", id)[
             0
         ]["thumbnail"]
+        if not post.get("profile_picture"):
+            with open("static/pics/pfp.png", "rb") as f:
+                post["profile_picture"] = f.read()
         return post
 
     @staticmethod
@@ -26,4 +46,6 @@ class Repo:
 
     @staticmethod
     def get_thumbnail(id):
-        return db.execute("SELECT thumbnail FROM news WHERE id = ?;", id)[0]["thumbnail"]
+        return db.execute("SELECT thumbnail FROM news WHERE id = ?;", id)[0][
+            "thumbnail"
+        ]

@@ -1,4 +1,5 @@
-import base64
+import base64, humanize
+from datetime import datetime
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFProtect
 from flask_tui_editor import TUIEditor
@@ -9,12 +10,12 @@ from routes.admin import stats, manage, mod, announce
 
 def create_app():
     app = Flask(__name__)
-    csrf = CSRFProtect()
-    csrf.init_app(app)
+    CSRFProtect().init_app(app)
     TUIEditor(app)
     app.config.from_pyfile("config.py")
     app.jinja_env.filters["title"] = lambda x: x.replace("_", " ").title()
     app.jinja_env.filters["encode"] = lambda x: base64.b64encode(x).decode() if x else None
+    app.jinja_env.filters["date"] = lambda x: humanize.naturaltime(datetime.strptime(x, "%Y-%m-%d %H:%M:%S.%f" if "." in x else "%Y-%m-%d %H:%M:%S" if " " in x else "%Y-%m-%d"))
 
     for blueprint in [
         index,

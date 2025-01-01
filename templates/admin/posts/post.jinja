@@ -11,3 +11,6 @@
     Move to Archive
 </a>
 {% endblock %}
+{% block author %}
+<a href="/profile?id={{post.user_id}}"><img src="data:image/png;base64,{{post.profile_picture|encode}}">{{post.display_name}}</a>
+{% endblock %}
