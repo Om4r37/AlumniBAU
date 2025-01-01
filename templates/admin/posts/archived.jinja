@@ -1,0 +1,7 @@
+{% extends "admin/posts/post.jinja" %}
+{% block archive %}
+<a href="/unarchive_announcement?id={{post.id}}" class="green-btn">
+    <img src="/static/pics/icons/admin/archive.svg">
+    Move Out of Archive
+</a>
+{% endblock %}

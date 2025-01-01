@@ -6,13 +6,13 @@
 <link rel="stylesheet" href="/static/styles/alumni/posts.css">
 <script src="/static/scripts/toastui-editor-viewer.min.js"></script>
 <div class="container">
-    <div></div>
-    <h2>News</h2>
+    <div>{% block archive %}{% endblock %}</div>
+    <h2>{% block page_title %}News{% endblock %}</h2>
     <div>{% block announce %}{% endblock %}</div>
 </div>
 {% if posts %}
 {% for post in posts %}
-<div class="post posts" onclick="window.location.href='/{% block route %}post{% endblock %}?id={{post.id}}'">
+<div class="post posts" onclick="window.location.href='/{% block route %}announcement{% endblock %}?id={{post.id}}'">
     <h2 class="post-title">{{post.title}}</h2>
 {% if post.thumbnail %}<img class="thumbnail" src="data:image/png;base64,{{post.thumbnail|encode}}">{% endif %}
     <div id="_{{post.id}}"></div>
@@ -28,6 +28,6 @@ const _{{post.id}} = new toastui.Editor({
 {% endfor %}
 </script>
 {% else %}
-<p id="empty-message">There are no announcements yet.</p>
+<p id="empty-message">There are no announcements here yet.</p>
 {% endif %}
 {% endblock %}

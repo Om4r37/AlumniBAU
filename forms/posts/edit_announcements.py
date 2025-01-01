@@ -14,4 +14,4 @@ class EditAnnouncementForm(FlaskForm):
     title = StringField("Enter Title:", validators=[InputRequired()])
     file = HiddenField()
     content = TUIEditorField("", render_kw={"editor_options": json.dumps(options)})
-    submit = SubmitField("Post")
+    submit = SubmitField("Save Changes")

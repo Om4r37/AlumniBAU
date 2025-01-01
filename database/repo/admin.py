@@ -111,6 +111,20 @@ class Admin:
         )
 
     @staticmethod
+    def get_archived_news():
+        return db.execute(
+            "SELECT * FROM posts INNER JOIN news ON posts.id = news.id WHERE archived = TRUE ORDER BY publish_date DESC;"
+        )
+    
+    @staticmethod
+    def archive_announcement(id):
+        db.execute("UPDATE news SET archived = TRUE WHERE id = ?;", id)
+
+    @staticmethod
+    def unarchive_announcement(id):
+        db.execute("UPDATE news SET archived = FALSE WHERE id = ?;", id)
+
+    @staticmethod
     def update_password(user_id, password):
         db.execute(
             "UPDATE admins SET password_hash = ? WHERE id = ?;",

@@ -5,8 +5,12 @@ class Repo:
     @staticmethod
     def get_news():
         return db.execute(
-            "SELECT * FROM posts INNER JOIN news ON posts.id = news.id ORDER BY publish_date DESC;"
+            "SELECT * FROM posts INNER JOIN news ON posts.id = news.id WHERE archived = FALSE ORDER BY publish_date DESC;"
         )
+
+    @staticmethod
+    def get_posts():
+        return db.execute("SELECT * FROM alumni_posts ORDER BY publish_date DESC;")
 
     @staticmethod
     def get_news_post(id):

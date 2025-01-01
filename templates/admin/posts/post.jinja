@@ -1,7 +1,13 @@
 {% extends "other/post.jinja" %}
 {% block edit %}
-<a href="/edit_announcement?id={{post.id}}" class="edit">
+<a href="/edit_announcement?id={{post.id}}" class="edit green-btn">
     <img src="/static/pics/icons/admin/edit.svg">
     Edit
+</a>
+{% endblock %}
+{% block archive %}
+<a href="/archive_announcement?id={{post.id}}" class="green-btn">
+    <img src="/static/pics/icons/admin/archive.svg">
+    Move to Archive
 </a>
 {% endblock %}

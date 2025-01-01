@@ -10,7 +10,7 @@ bp = Blueprint("posts", __name__)
 def posts():
     return render_template(
         "alumni/posts/posts.jinja",
-        posts=Repo.get_news(),
+        posts=Repo.get_posts(),
     )
 
 

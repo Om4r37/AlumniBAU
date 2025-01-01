@@ -57,17 +57,21 @@
     max-width: 100%;
 }
 
-.edit {
+.green-btn {
     color: white;
     background-color: #006226f5;
     border: none;
     border-radius: 0.5rem;
     text-decoration: none;
     padding: 0.5rem 1rem;
-    margin-left: 50%;
+    margin-left: 1rem;
+}
+
+.edit {
+    margin-left: 40%;
     transform: translateX(-50%);
 }
-.edit > img {
+.green-btn > img {
     height: 1rem;
     filter: invert(1);
     padding-right: 0.2rem;

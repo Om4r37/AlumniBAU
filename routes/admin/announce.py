@@ -49,3 +49,34 @@ def edit_thumbnail():
         flash("Thumbnail edited successfully!", "success")
         return redirect("/edit_thumbnail?id=" + id)
     return render_template("admin/news/edit_thumbnail.jinja", form=form, id=id)
+
+
+@bp.route("/archive_announcement")
+@announcer_required
+def archive_announcement():
+    id = request.args.get("id")
+    Admin.archive_announcement(id)
+    flash("Announcement archived successfully!", "success")
+    return redirect("/archived?id=" + id)
+
+
+@bp.route("/unarchive_announcement")
+@announcer_required
+def unarchive_announcement():
+    id = request.args.get("id")
+    Admin.unarchive_announcement(id)
+    flash("Announcement unarchived successfully!", "success")
+    return redirect("/announcement?id=" + id)
+
+
+@bp.route("/archived")
+@announcer_required
+def archived():
+    id = request.args.get("id")
+    return render_template("admin/posts/archived.jinja", post=Repo.get_news_post(id))
+
+
+@bp.route("/archive")
+@announcer_required
+def archive():
+    return render_template("admin/news/archive.jinja", posts=Admin.get_archived_news())

@@ -1,7 +1,7 @@
 {% extends "layout/layout.jinja" %}
 {% from "utils/form.jinja" import render_form %}
 {% set highlight_tab = "news" %}
-{% set title = "Post" %}
+{% set title = "{{post.title}}" %}
 {% block main %}
 <h1>Post Request</h1>
 {{ render_form(form) }}

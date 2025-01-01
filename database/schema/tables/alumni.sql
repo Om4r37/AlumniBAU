@@ -26,7 +26,7 @@ CREATE TABLE alumni (
     postgrad BOOLEAN,
 
     -- survey
-    submitted BOOLEAN DEFAULT 0,
+    submitted BOOLEAN DEFAULT FALSE,
 
     -- personal
     email TEXT,
