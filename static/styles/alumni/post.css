@@ -6,7 +6,7 @@
     color: white;
     background-color: #006226f5;
     margin-top: 1rem;
-    margin-inline: 50%;
+    margin-inline: 45%;
 }
 
 form {
@@ -71,4 +71,12 @@ label[for="file"] {
     top: 45%;
     left: 90%;
     text-align: center;
+}
+
+#add {
+    margin-left: 24rem;
+}
+
+#content {
+    margin-top: 1rem;
 }

@@ -90,7 +90,7 @@ class Admin:
         db.execute(
             "INSERT INTO news (id, thumbnail) VALUES (?, ?);",
             id,
-            sqlite3.Binary(data["file"].read()),
+            sqlite3.Binary(data["file"].read()) if data["file"] else None,
         )
 
     @staticmethod

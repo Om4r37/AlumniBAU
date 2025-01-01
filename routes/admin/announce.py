@@ -28,7 +28,11 @@ def edit():
     announcement = Repo.get_news_post(id)
     form = EditAnnouncementForm(data=announcement, id=id)
     form.route = f"/edit_announcement?id={id}"
-    form.file.label = f'<div class="container"><img src="data:image/png;base64,{base64.b64encode(announcement.get("thumbnail")).decode()}" class="image"><a href="/edit_thumbnail?id={id}" class="middle green">Change</a></div>'
+    form.file.label = (
+        f'<div class="container"><img src="data:image/png;base64,{base64.b64encode(announcement.get("thumbnail")).decode()}" class="image"><a href="/edit_thumbnail?id={id}" class="middle green">Change</a></div>'
+        if announcement.get("thumbnail")
+        else f'<br><a href="/edit_thumbnail?id={id}" class="green" id="add">Add Thumbnail</a>'
+    )
     if form.validate_on_submit():
         Admin.edit_announcement(form.data, id)
         flash("Announcement edited successfully!", "success")
@@ -42,7 +46,7 @@ def edit_thumbnail():
     id = request.args.get("id")
     announcement = Repo.get_news_post(id)
     form = EditThumbnailForm(data=announcement, id=id)
-    form.file.label = f'<img id="output" src="data:image/png;base64,{base64.b64encode(Repo.get_thumbnail(id)).decode()}"/>'
+    form.file.label = f'<img id="output" src="data:image/png;base64,{base64.b64encode(announcement.get("thumbnail")).decode() if announcement.get("thumbnail") else ''}"/>'
     form.route = f"/edit_thumbnail?id={id}"
     if form.validate_on_submit():
         Admin.edit_thumbnail(form.data, id)
