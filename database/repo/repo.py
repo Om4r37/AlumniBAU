@@ -17,7 +17,7 @@ class Repo:
 
     @staticmethod
     def get_posts():
-                return db.execute(
+        return db.execute(
             """
             SELECT posts.*, alumni_posts.*, users.display_name, users.profile_picture 
             FROM posts 
@@ -32,11 +32,11 @@ class Repo:
         post = dict(
             db.execute(
                 """
-            SELECT posts.*, users.display_name, users.profile_picture 
-            FROM posts 
-            INNER JOIN users ON posts.user_id = users.id 
-            WHERE posts.id = ?;
-            """,
+SELECT posts.*, users.display_name, users.profile_picture 
+FROM posts 
+INNER JOIN users ON posts.user_id = users.id 
+WHERE posts.id = ?;
+                """,
                 id,
             )[0]
         )
@@ -50,7 +50,21 @@ class Repo:
 
     @staticmethod
     def get_post(id):
-        return db.execute("SELECT * FROM posts WHERE id = ?;", id)[0]
+        post = dict(
+            db.execute(
+                """
+SELECT posts.*, users.display_name, users.profile_picture 
+FROM posts 
+INNER JOIN users ON posts.user_id = users.id 
+WHERE posts.id = ?;
+                """,
+                id,
+            )[0]
+        )
+        if not post.get("profile_picture"):
+            with open("static/pics/pfp.png", "rb") as f:
+                post["profile_picture"] = f.read()
+        return post
 
     @staticmethod
     def get_thumbnail(id):

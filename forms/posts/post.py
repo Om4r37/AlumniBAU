@@ -9,7 +9,7 @@ options = {"hideModeSwitch": True, "height": "600px"}
 
 
 class PostForm(FlaskForm):
-    route = "/post"
+    route = "/write_post"
     params = 'enctype="multipart/form-data"'
     title = StringField("Enter Title:", validators=[InputRequired()])
     content = TUIEditorField("", render_kw={"editor_options": json.dumps(options)})

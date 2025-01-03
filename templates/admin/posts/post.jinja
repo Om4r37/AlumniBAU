@@ -1,4 +1,5 @@
 {% extends "other/post.jinja" %}
+{% set highlight_tab = "news" %}
 {% block edit %}
 <a href="/edit_announcement?id={{post.id}}" class="edit green-btn">
     <img src="/static/pics/icons/admin/edit.svg">
@@ -12,5 +13,7 @@
 </a>
 {% endblock %}
 {% block author %}
-<a href="/profile?id={{post.user_id}}"><img src="data:image/png;base64,{{post.profile_picture|encode}}">{{post.display_name}}</a>
+<a href="/profile?id={{post.user_id}}">
+    <img src="data:image/png;base64,{{post.profile_picture|encode}}">{{post.display_name}}
+</a>
 {% endblock %}

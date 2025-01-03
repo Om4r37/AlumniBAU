@@ -7,6 +7,18 @@ from forms.posts.post import PostForm
 bp = Blueprint("posts", __name__)
 
 
+@bp.route("/post")
+@login_required
+def post():
+    id = request.args.get("id")
+    if id:
+        return render_template(
+            'alumni/posts/post.jinja',
+            post=Repo.get_post(id),
+        )
+    return redirect("/posts")
+
+
 @bp.route("/posts")
 @login_required
 def posts():
@@ -24,14 +36,15 @@ def announce():
             f'{"admin/posts" if session.get("role") == "admin" and "announce" in session.get("perms") else "other"}/post.jinja',
             post=Repo.get_news_post(id),
         )
+    return redirect("/news")
 
 
-@bp.route("/post", methods=["GET", "POST"])
+@bp.route("/write_post", methods=["GET", "POST"])
 @login_required
-def post():
+def write_post():
     form = PostForm()
     if form.validate_on_submit():
         User.create_post(form.data, session.get("id"))
         flash("Announcement created successfully!", "success")
         return redirect("/posts")
-    return render_template("alumni/posts/post.jinja", form=form)
+    return render_template("alumni/posts/write_post.jinja", form=form)

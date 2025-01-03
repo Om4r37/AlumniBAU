@@ -1,5 +1,5 @@
 CREATE TRIGGER add_alumni AFTER INSERT ON alumni BEGIN
-    INSERT INTO users (id, phone_number, email) VALUES (NEW.id, NEW.phone_number, NEW.email);
+    INSERT INTO users (id, phone_number, email, display_name) VALUES (NEW.id, NEW.phone_number, NEW.email, NEW.full_name);
     UPDATE stats SET alumni_count = alumni_count + 1;
 
     -- gender
