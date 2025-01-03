@@ -113,7 +113,14 @@ class Admin:
     @staticmethod
     def get_archived_news():
         return db.execute(
-            "SELECT * FROM posts INNER JOIN news ON posts.id = news.id WHERE archived = TRUE ORDER BY publish_date DESC;"
+            """
+            SELECT posts.*, news.*, users.display_name, users.profile_picture 
+            FROM posts 
+            INNER JOIN news ON posts.id = news.id 
+            INNER JOIN users ON posts.user_id = users.id 
+            WHERE archived = TRUE 
+            ORDER BY publish_date DESC;
+            """
         )
     
     @staticmethod
