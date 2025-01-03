@@ -6,7 +6,7 @@
 <script src="/static/scripts/chart.min.js"></script>
 <h1>Stats</h1>
 <div class="container">
-{% set counters = ["alumni", "news", "posts", "comments", "likes", "dislikes"] %}
+{% set counters = ["alumni", "news", "comments"] %}
 {% for counter in counters %}
     <a href="/{{counter}}">
         <h3 id="{{counter}}">{{counter|capitalize}} Count: {{stats[counter + "_count"]}}</h3>
