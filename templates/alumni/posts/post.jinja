@@ -1,8 +1,12 @@
 {% extends "layout/layout.jinja" %}
 {% from "utils/form.jinja" import render_form %}
-{% set highlight_tab = "news" %}
-{% set title = "{{post.title}}" %}
+{% set highlight_tab = "posts" %}
+{% set title = "Add a Post" %}
 {% block main %}
-<h1>Post Request</h1>
+<link href="/static/styles/alumni/post.css" rel="stylesheet">
+<script src="/static/scripts/post.js"></script>
+<h2>{% block header %}Add a Post{% endblock %}</h2>
+{{ flask_tui_editor.css }}
 {{ render_form(form) }}
+{{ flask_tui_editor.js }}
 {% endblock %}

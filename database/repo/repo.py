@@ -17,7 +17,15 @@ class Repo:
 
     @staticmethod
     def get_posts():
-        return db.execute("SELECT * FROM alumni_posts ORDER BY publish_date DESC;")
+                return db.execute(
+            """
+            SELECT posts.*, alumni_posts.*, users.display_name, users.profile_picture 
+            FROM posts 
+            INNER JOIN alumni_posts ON posts.id = alumni_posts.id 
+            INNER JOIN users ON posts.user_id = users.id 
+            ORDER BY publish_date DESC;
+            """
+        )
 
     @staticmethod
     def get_news_post(id):

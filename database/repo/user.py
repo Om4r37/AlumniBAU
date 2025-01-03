@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 from database.database import db
 from database.repo.alumnus import Alumnus
 
@@ -83,5 +84,19 @@ class User:
         db.execute(
             "UPDATE users SET profile_picture = ? WHERE id = ?;",
             sqlite3.Binary(pfp.read()),
+            id,
+        )
+    
+    @staticmethod
+    def create_post(data, id):
+        id = db.execute(
+            "INSERT INTO posts (user_id, title, content, publish_date) VALUES (?, ?, ?, ?);",
+            id,
+            data["title"],
+            data["content"],
+            datetime.now(),
+        )
+        db.execute(
+            "INSERT INTO alumni_posts (id) VALUES (?);",
             id,
         )

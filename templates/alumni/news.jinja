@@ -13,7 +13,13 @@
 {% if posts %}
 {% for post in posts %}
 <div class="post-header">
-    {% if session.get("role") == "admin" and "announce" in session.get("perms") %}<a href="/profile?id={{post.user_id}}"><img src="data:image/png;base64,{{post.profile_picture|encode}}">{{post.display_name}}</a>{% endif %} posted {{post.publish_date|date}}
+{% if session.get("role") == "admin" and "announce" in session.get("perms") %}
+    <a href="/profile?id={{post.user_id}}">
+        <img src="{% if post.profile_picture %}data:image/png;base64,{{post.profile_picture|encode}}{% else %}/static/pics/pfp.png{% endif %}">
+        {{post.display_name}}
+    </a>
+{% endif %}
+    &nbsp;posted {{post.publish_date|date}}
 </div>
 <div class="post posts" onclick="window.location.href='/{% block route %}announcement{% endblock %}?id={{post.id}}'">
     <h2 class="post-title">{{post.title}}</h2>

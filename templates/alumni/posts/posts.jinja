@@ -6,12 +6,24 @@
 <link rel="stylesheet" href="/static/styles/alumni/posts.css">
 <script src="/static/scripts/toastui-editor-viewer.min.js"></script>
 <div class="container">
-    <div></div>
-    <h2>Posts</h2>
     <div>{% block approve %}{% endblock %}</div>
+    <h2>Posts</h2>
+    <div>
+        <a href="/post">
+            <img src="/static/pics/icons/plus.svg">
+            Add A Post
+        </a>
+    </div>
 </div>
 {% if posts %}
 {% for post in posts %}
+<div class="post-header">
+    <a href="/profile?id={{post.user_id}}">
+        <img src="{% if post.profile_picture %}data:image/png;base64,{{post.profile_picture|encode}}{% else %}/static/pics/pfp.png{% endif %}">
+        {{post.display_name}}
+    </a>
+    &nbsp;posted {{post.publish_date|date}}
+</div>
 <div id="_{{post.id}}" class="post posts" onclick="window.location.href='/post?id={{post.id}}'"></div>
 {% endfor %}
 <script>
