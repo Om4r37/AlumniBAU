@@ -72,6 +72,7 @@ class User:
             user.update(dict(Alumnus.get_alumnus_by_id(id)))
             user.pop("password_hash")
             user.pop("nno_hash")
+            user.pop("cv")
         return user
 
     @staticmethod
