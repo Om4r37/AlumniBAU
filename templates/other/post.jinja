@@ -14,6 +14,24 @@
 </div>
 {% block edit %}{% endblock %}
 {% block archive %}{% endblock %}
+<div id="comment-form">
+{% block comment %}{% endblock %}
+</div>
+<h3 id="comments">Comments</h3>
+{% for comment in comments %}
+<div class="comment">
+<a href="/profile?id={{comment.user_id}}">
+    <img src="{% if comment.profile_picture %}data:image/png;base64,{{comment.profile_picture|encode}}{% else %}/static/pics/pfp.png{% endif %}">
+    {{ comment.display_name }}
+</a>
+&nbsp;posted {{ comment.publish_date|date }}
+<div class="comment-content">
+{% for line in comment.content.split("\n") %}
+{{ line }}<br>
+{% endfor %}
+</div>
+</div>
+{% endfor %}
 <script>
 const post = new toastui.Editor({
     el: document.querySelector('#post'),

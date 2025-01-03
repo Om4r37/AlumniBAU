@@ -1,7 +1,11 @@
 {% extends "other/post.jinja" %}
-{% set highlight_tab = "posts" %}
-{% block author %}
+{% from "utils/form.jinja" import render_form %}
+{% set highlight_tab = "news" %}
+{# {% block author %}
 <a href="/profile?id={{post.user_id}}">
     <img src="data:image/png;base64,{{post.profile_picture|encode}}">{{post.display_name}}
 </a>
+{% endblock %} #}
+{% block comment %}
+{{ render_form(form) }}
 {% endblock %}

@@ -16,18 +16,6 @@ class Repo:
         )
 
     @staticmethod
-    def get_posts():
-        return db.execute(
-            """
-            SELECT posts.*, alumni_posts.*, users.display_name, users.profile_picture 
-            FROM posts 
-            INNER JOIN alumni_posts ON posts.id = alumni_posts.id 
-            INNER JOIN users ON posts.user_id = users.id 
-            ORDER BY publish_date DESC;
-            """
-        )
-
-    @staticmethod
     def get_news_post(id):
         post = dict(
             db.execute(
@@ -71,3 +59,16 @@ WHERE posts.id = ?;
         return db.execute("SELECT thumbnail FROM news WHERE id = ?;", id)[0][
             "thumbnail"
         ]
+
+    @staticmethod
+    def get_comments(id):
+        return db.execute(
+            """
+            SELECT comments.*, users.display_name, users.profile_picture 
+            FROM comments 
+            INNER JOIN users ON comments.user_id = users.id 
+            WHERE post_id = ? 
+            ORDER BY publish_date DESC;
+            """,
+            id,
+        )
